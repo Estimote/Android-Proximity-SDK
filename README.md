@@ -167,6 +167,31 @@ protected void onDestroy() {
     super.onDestroy();
 }
 ```
+## Background scanning
+It is now possible to scan when the app is in the background (or even killed), but it needs to be handled properly according to the Android official guidelines. Short explanation:
+
+> IMPORTANT: Launching "silent bluetooth scan" without the knowledge of the user is not permitted by the system - if you do so, your service might be killed in any moment, without your permission. We don't want this behaviour, so we decided to only allow scanning in the background using a foreground service with a notification. You can implement your own solution, based on any kind of different service/API, but you must bear in mind, that the system might kill it if you don't handle it properly. 
+
+1. Declare an notification object like this: 
+``` Kotlin
+// KOTLIN
+val notification = Notification.Builder(this)
+              .setSmallIcon(R.drawable.notification_icon_background)
+              .setContentTitle("Beacon scan")
+              .setContentText("Scan is running...")
+              .setPriority(Notification.PRIORITY_HIGH)
+              .build()
+```
+
+2. Use ` .withScannerInForegroundService(notification)` when building `ProximityObserver`:
+``` Kotlin
+// KOTLIN
+val scanHandler = proximityObserver.startWithScannerInForegroundService(notification)
+```
+
+3. To keep scanning active while the user is not in your app (home button pressed) put start/stop in `onCreate()`/`onDestroy()` of your desired **ACTIVITY**. 
+
+4. To scan even after the user has killed your app (swipe in app manager) put start/stop in `onCreate()`/`onDestroy()` of your **CLASS EXTENDING APPLICATION CLASS**. You will also need to handle stopping scan through the notification, because even though the user will destroy the activity, the notification (foregrounbd service) will still remain visible. You can play with it and see the behaviour by yourself. Please, read more in [official android documentation](https://developer.android.com/training/notify-user/build-notification.html) about managing notification objects. 
 
 ## Example app
 
