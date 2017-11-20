@@ -168,7 +168,7 @@ protected void onDestroy() {
 }
 ```
 ## Background scanning
-It is now possible to scan when the app is in the background (or even killed), but it needs to be handled properly according to the Android official guidelines. Short explanation:
+It is now possible to scan when the app is in the background (or even killed), but it needs to be handled properly according to the Android official guidelines. Please, read the explanation below:
 
 > IMPORTANT: Launching "silent bluetooth scan" without the knowledge of the user is not permitted by the system - if you do so, your service might be killed in any moment, without your permission. We don't want this behaviour, so we decided to only allow scanning in the background using a foreground service with a notification. You can implement your own solution, based on any kind of different service/API, but you must bear in mind, that the system might kill it if you don't handle it properly. 
 
