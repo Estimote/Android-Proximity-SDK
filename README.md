@@ -66,8 +66,8 @@ EstimoteCloudCredentials cloudCredentials = new EstimoteCloudCredentials(YOUR_AP
 ProximityObserver proximityObserver = new ProximityObserverFactory().create(getApplicationContext(), cloudCredentials);
 ```
 
-## 2. Define proximity rules
-Now for the fun part - create your own proximity rules using `proximityObserver.ruleBuilder()`
+## 2. Define proximity zones
+Now for the fun part - create your own proximity zones using `proximityObserver.zoneBuilder()`
 
 ```Kotlin
 // Kotlin
@@ -117,7 +117,7 @@ ProximityRule rule1 =
 - **inCustomRange** - custom desired trigger distance in meters. 
 
 ## 3. Start proximity observation
-When you are done defining your rules, you will need to start the observation process:
+When you are done defining your zones, you will need to start the observation process:
 
 ```Kotlin
 // Kotlin
@@ -170,7 +170,7 @@ protected void onDestroy() {
 
 ## Example app
 
-To get a working prototype, check out the example app. It's a single screen app with three labels that change the background color when:
+To get a working prototype, check out the [example app](https://github.com/Estimote/Android-Proximity-SDK/tree/master/example/ProximityApp). It's a single screen app with three labels that change the background color when:
 
 - you are in close proximity to the first desk,
 - in close proximity to the second desk,
@@ -180,11 +180,8 @@ The demo requires at least two Proximity or Location beacons configured for Esti
 
 The demo expects beacons having specific tags assigned:
 
-- `{"attachment":{"blueberry_desk":true,"venue":"office"}}` for the first one,
-- `{"attachment":{"mint_desk":true,"venue":"office"}}` for the second one.
-
-These attachments can be used to define the zones presented below:
-![Zones](/images/demo_attachments.png)
+- `{"attachment":{"venue":"office","desk":"mint"}}` for the first one,
+- `{"attachment":{"venue":"office","desk":"blueberry"}}` for the second one.
 
 
 ## Documentation
@@ -192,8 +189,9 @@ Javadoc documentation available soon...
 
 ## Your feedback and questions
 At Estimote we're massive believers in feedback! Here are some common ways to share your thoughts with us:
-  - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-SDK/issues).
+  - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-Proximity-SDK/issues).
   - Asking our community managers on our [Estimote SDK for Android forum](https://forums.estimote.com/c/android-sdk).
+  - Keep up with the development progress reports [in this thread on our forums](https://forums.estimote.com/t/changes-to-android-sdk-current-progress/7450). 
 
 ## Changelog
 To see what has changed in recent versions of our SDK, see the [CHANGELOG](CHANGELOG.md).
