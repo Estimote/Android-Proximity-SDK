@@ -9,7 +9,8 @@ import android.support.v4.app.NotificationCompat
 
 /**
  * This class will create proper Notification for given OS version.
- * Notice, that Android Oreo needs to have NotificationChannel setup.
+ * Notice, that Android Oreo needs to have additional NotificationChannel created.
+ * Feel free to use this class as you want.
  *
  * @author Estimote Inc. (contact@estimote.com)
  */
@@ -26,11 +27,10 @@ class NotificationCreator {
             else createNotificationForPreOreo(context)
 
     private fun createNotificationForPreOreo(context: Context): Notification {
-        return NotificationCompat.Builder(context)
+        return NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.beacon_gray)
                 .setContentTitle(NOTIFICATION_TITLE)
                 .setContentText(NOTIFICATION_TEXT)
-                .setChannel(CHANNEL_ID)
                 .build()
     }
 

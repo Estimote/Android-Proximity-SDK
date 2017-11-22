@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.estimote.proximityapp"
         minSdkVersion 19
@@ -30,5 +30,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.estimote:proximity-sdk:0.1.0-alpha.4'
+    compile 'com.estimote:proximity-sdk:0.1.0-alpha.5'
 }
