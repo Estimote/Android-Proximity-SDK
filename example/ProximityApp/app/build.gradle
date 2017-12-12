@@ -30,5 +30,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
-    compile 'com.estimote:proximity-sdk:0.1.0-alpha.5'
+    // Our Proximity SDK
+    compile 'com.estimote:proximity-sdk:0.1.0-alpha.6'
+    // Our support library with Android UI handy components. We will use EstimoteRequirementsWizard from there.
+    compile 'com.estimote:mustard:0.1.0'
 }

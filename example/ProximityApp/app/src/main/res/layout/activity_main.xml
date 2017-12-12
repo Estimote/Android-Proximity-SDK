@@ -13,21 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Start proximity observation"
-            app:layout_constraintTop_toBottomOf="@+id/venue_image"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <ImageView
+        <com.estimote.proximityapp.BubbleView
             android:id="@+id/venue_image"
             android:layout_width="371dp"
             android:layout_height="363dp"
@@ -42,7 +28,7 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@color/background_white"/>
 
-        <ImageView
+        <com.estimote.proximityapp.BubbleView
             android:id="@+id/mint_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -59,7 +45,7 @@
             app:layout_constraintVertical_bias="0.501"
             app:srcCompat="@color/primary"/>
 
-        <ImageView
+        <com.estimote.proximityapp.BubbleView
             android:id="@+id/blueberry_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
