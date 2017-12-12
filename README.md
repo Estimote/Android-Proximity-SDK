@@ -1,8 +1,8 @@
 # Estimote Proximity SDK for Android 
 
-Estimote Proximity SDK aims to provide a simple way for apps to react to physical context by reading signals from Estimote Beacons.
+*Estimote Proximity SDK aims to provide a simple way for apps to react to physical context by reading signals from Estimote Beacons.*
 
-Why should you use it?
+**Main features:**
 
 1. Reliability. It's built upon Estimote Monitoring, Estimote's algorithm for reliable enter/exit reporting.
 2. No need to operate on abstract identifiers, or Proximity UUID, Major, Minor triplets. Estimote Proximity SDK lets you define zones by setting predicates for human-readable JSONs.
@@ -12,17 +12,17 @@ Why should you use it?
 ## Requirements
 
 - One or more [Estimote Proximity or Location Beacon](https://estimote.com/products/) with the `Estimote Location` packet advertising enabled. 
-- An Android device with Bluetooth Low Energy support. We suggest using Android Lollipop or newer. 
-
+- An Android device with Bluetooth Low Energy support. We suggest using Android 5.0+ (Lollipop or newer). 
+- An account in [Estimote Cloud](https://cloud.estimote.com/#/)
 ## Installation
 
 Add this line to your `build.gradle` file:
 ```Gradle
-compile 'com.estimote:proximity-sdk:0.1.0-alpha.5'
+compile 'com.estimote:proximity-sdk:0.1.0-alpha.6'
 ```
 Note: this is a pre-release version of Estimote Proximity SDK for Android.
 
-## Attachment-based identification
+## Attachment-based identification explanation
 
 Details of each of your Estimote devices are available in Estimote Cloud. Each device has a unique identifier, but remembering it and using it for every one of your devices can be challenging. This is why Estimote Proximity SDK uses attachment-based identification.
 
@@ -39,7 +39,7 @@ During the pre-release stage of Estimote Proximity SDK, attachment JSONs are enc
 }
 ```
 
-## 0. Setting up attachments in Cloud 
+## 0. Setting up attachments in your Estimote Cloud account
 1. Go to https://cloud.estimote.com/#/
 2. Click on the beacon you want to configure
 3. Click the Edit settings button
@@ -52,19 +52,38 @@ Tags are Cloud-only settings — no additional connecting to the beacons with th
 ![Cloud attachments](/images/adding_attachment_json_tag.png)
 
 ## 1. Build proximity observer
-The `ProximityObserver` is the main object for performing proximity observations. Build it using `ProximityObserverFactory` - and don't forget to put in your Estimote Cloud credentials!
+The `ProximityObserver` is the main object for performing proximity observations. Build it using `ProximityObserverBuilder` - and don't forget to put in your Estimote Cloud credentials!
 
 ```Kotlin
 // Kotlin
 val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE , YOUR_APP_TOKEN_HERE)
-val proximityObserver = ProximityObserverFactory().create(applicationContext, cloudCredentials)
+proximityObserver = ProximityObserverBuilder(applicationContext, cloudCredentials)
+                .withBalancedPowerMode()
+                .withOnErrorAction { /* handle errors here */ }
+                .build()
 ```
 
 ```Java
 // Java
 EstimoteCloudCredentials cloudCredentials = new EstimoteCloudCredentials(YOUR_APP_ID_HERE, YOUR_APP_TOKEN_HERE);
-ProximityObserver proximityObserver = new ProximityObserverFactory().create(getApplicationContext(), cloudCredentials);
+ProximityObserver proximityObserver = new ProximityObserverBuilder(getApplicationContext(), cloudCredentials)
+                .withBalancedPowerMode()
+                .withOnErrorAction(new Function1<Throwable, Unit>() {
+                  @Override
+                  public Unit invoke(Throwable throwable) {
+                    return null;
+                  }
+                })
+                .build();
 ```
+You can customize your `ProximityObject` using the available options:
+- **withLowLatencyPowerMode** - the most reliable mode, but may drain battery a lot. 
+- **withBalancedPowerMode** - balance between scan reliability and battery drainage. 
+- **withLowPowerMode** - battery efficient mode, but not that reliable.
+- **withOnErrorAction** - action triggered when any error occurs - such as cloud connection problems, scanning, etc.
+- **withScannerInForegroundService** - starts the observation proces with scanner wrapped in [foreground service](https://developer.android.com/guide/components/services.html). This will display notification in user's notifications bar, but will ensure that the scanning won't be killed by the system. **Important:** Your scanning will be handled without the foreground service by default. 
+- **withTelemetryReporting** - Enabling this will send telemetry data from your beacons, such as light level, or temperature, to our cloud. This is also an important data for beacon health check (such as tracking battery life for example). Bear in mind that enabling this will slightly increase battery drain. 
+- **withAnalyticsReportingDisabled** - Analytic data (current visitors in your zones, number of enters, etc) ) is sent to our cloud by default. Use this to turn it off.
 
 ## 2. Define proximity zones
 Now for the fun part - create your own proximity zones using `proximityObserver.zoneBuilder()`
@@ -108,10 +127,11 @@ ProximityZone venueZone =
         })
         .create();
 ```
-- **forAttachmentKey** - the key you want to trigger actions for. 
+You zones can be defined with the below options: 
+- **forAttachmentKey** - the key you want to trigger actions for. Value is omitted when checking the predicate (wildcard).
 - **forAttachmentKeyAndValue** - the exact key and value that will trigger this zone actions. 
-- **onEnterAction** - the action that will be triggered when the user enters the zone defined by given key. 
-- **onExitAction** - the action that will be triggered when the user exits the zone defined by given key. 
+- **onEnterAction** - the action that will be triggered when the user enters the zone  
+- **onExitAction** - the action that will be triggered when the user exits the zone.
 - **onChangeAction** - triggers when there is a change in proximity attachments of a given key. If the zone consists of more than one beacon, this will help tracking the ones that are nearby inside the zone, while still remaining one `onEnter` and `onExit` event for the whole zone in general.  
 - **inFarRange** - the far distance at which actions will be invoked. Notice that due to the nature of Bluetooth Low Energy, it is "desired" and not "exact." We are constantly improving the precision. 
 - **inNearRange** - the near distance at which actions will be invoked.
@@ -124,9 +144,7 @@ When you are done defining your zones, you will need to start the observation pr
 // Kotlin
 val observationHandler = proximityObserver
                .addProximityZone(venueZone)
-               .withBalancedPowerMode()
-               .withOnErrorAction{/* Do something here */}
-               .startWithScannerInForegroundService(notification)
+               .start()
 ```
 
 ```Java
@@ -134,25 +152,10 @@ val observationHandler = proximityObserver
 ProximityObserver.Handler observationHandler =
        proximityObserver
            .addProximityZone(venueZone)
-           .withBalancedPowerMode()
-           .withOnErrorAction(new Function1<Throwable, Unit>() {
-             @Override
-             public Unit invoke(Throwable throwable) {
-               /* Do something here */
-               return null;
-             }
-           })
-           .startWithScannerInForegroundService(notification);
+           .start();
 ```
-- **addProximityZones** - adds your pre-defined zones to `ProximityObserver`.
-- **lowLatencyPowerMode** - the most reliable mode, but may drain battery a lot. 
-- **balancedPowerMode** - balance between scan reliability and battery drainage. 
-- **lowPowerMode** - battery efficient mode, but not that reliable.
-- **onErrorAction** - action triggered when any error occurs - such as cloud connection problems, scanning, etc.
-- **startWithForegroundScanner** - starts the observation proces with scanner wrapped in Foreground Service. This will display notification in notifications bar, but will ensure that the scanning won't be killed by the system. It may even work after the user kills your app. 
-- **startWithSimpleScanner** - starts the observation with scanner without any service. The scan will be destroyed when your app dies. Use this if you want to run a quick and simple scan, or you want to implement a service wrapper by yourself.
 
-After start, the `ProximityObserver` will return `ProximityObserver.Handler` that you can use to stop scanning later. For example:
+The `ProximityObserver` will return `ProximityObserver.Handler` that you can use to stop scanning later. For example:
 ```Kotlin
 // Kotlin
 override fun onDestroy() {
@@ -185,11 +188,7 @@ val notification = Notification.Builder(this)
               .build()
 ```
 
-2. Use ` .withScannerInForegroundService(notification)` when building `ProximityObserver`:
-``` Kotlin
-// KOTLIN
-val scanHandler = proximityObserver.startWithScannerInForegroundService(notification)
-```
+2. Use ` .withScannerInForegroundService(notification)` when building `ProximityObserver` via `ProximityObserverBuilder`:
 
 3. To keep scanning active while the user is not in your app (home button pressed) put start/stop in `onCreate()`/`onDestroy()` of your desired **ACTIVITY**. 
 
