@@ -18,7 +18,7 @@ Why should you use it?
 
 Add this line to your `build.gradle` file:
 ```Gradle
-compile 'com.estimote:proximity-sdk:0.1.0-alpha.4'
+compile 'com.estimote:proximity-sdk:0.1.0-alpha.5'
 ```
 Note: this is a pre-release version of Estimote Proximity SDK for Android.
 
@@ -82,7 +82,7 @@ val venueZone = proximityObserver.zoneBuilder()
 
 ```Java
 // Java
-ProximityRule rule1 = 
+ProximityZone venueZone = 
     proximityObserver.zoneBuilder()
         .forAttachmentKeyAndValue("venue", "office")
         .inFarRange()
@@ -92,12 +92,13 @@ ProximityRule rule1 =
             return null;
           }
         })
-        .withOnExitAction(new Function0<Unit>() {
-          @Override public Unit invoke() {
-             /* Do something here */
-             return null;
-          }
-        })
+        .withOnExitAction(new Function1<ProximityAttachment, Unit>() {
+              @Override
+              public Unit invoke(ProximityAttachment proximityAttachment) {
+                  /* Do something here */
+                  return null;
+              }
+          })
         .withOnChangeAction(new Function1<List<? extends ProximityAttachment>, Unit>() {
           @Override
           public Unit invoke(List<? extends ProximityAttachment> proximityAttachments) {
@@ -111,7 +112,7 @@ ProximityRule rule1 =
 - **forAttachmentKeyAndValue** - the exact key and value that will trigger this zone actions. 
 - **onEnterAction** - the action that will be triggered when the user enters the zone defined by given key. 
 - **onExitAction** - the action that will be triggered when the user exits the zone defined by given key. 
-- **onChangeAction** - triggers when there is a change in proximity attachments of a given key. If the zone consists of more than one beacon, this will help tracking the ones that are nearby, while still remaining one `onEnter` and `onExit` event. 
+- **onChangeAction** - triggers when there is a change in proximity attachments of a given key. If the zone consists of more than one beacon, this will help tracking the ones that are nearby inside the zone, while still remaining one `onEnter` and `onExit` event for the whole zone in general.  
 - **inFarRange** - the far distance at which actions will be invoked. Notice that due to the nature of Bluetooth Low Energy, it is "desired" and not "exact." We are constantly improving the precision. 
 - **inNearRange** - the near distance at which actions will be invoked.
 - **inCustomRange** - custom desired trigger distance in meters. 
@@ -122,7 +123,7 @@ When you are done defining your zones, you will need to start the observation pr
 ```Kotlin
 // Kotlin
 val observationHandler = proximityObserver
-               .addProximityZones(zone1, zone2, zone3)
+               .addProximityZone(venueZone)
                .withBalancedPowerMode()
                .withOnErrorAction{/* Do something here */}
                .startWithScannerInForegroundService(notification)
@@ -131,7 +132,8 @@ val observationHandler = proximityObserver
 ```Java
 // Java
 ProximityObserver.Handler observationHandler =
-       proximityObserver.addProximityZones(zone1, zone2, zone3)
+       proximityObserver
+           .addProximityZone(venueZone)
            .withBalancedPowerMode()
            .withOnErrorAction(new Function1<Throwable, Unit>() {
              @Override

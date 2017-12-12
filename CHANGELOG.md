@@ -1,7 +1,12 @@
 Changelog
 =====================
-## 0.1.0-alpha.4 (Oct 28, 2017)
+## 0.1.0-alpha.5 (Nov 22, 2017)
+- Added Analytics to the `ProximityObserver`. 
+  1. Your Enter/Exit events are now reported for each beacon.
+  2. You can check analytics data in Estimote 
+- Minor improvements to the scanning mechanism 
 
+## 0.1.0-alpha.4 (Oct 28, 2017)
 - Introduced improvements to API. Some breaking changes appeared:
   1. `ProximityObserver.RuleBuilder` is now `ProximityObserver.ZoneBuilder`
   2. `ProximityObserver` has now methods: `addProximityZone` instead of `addProximityRule`
