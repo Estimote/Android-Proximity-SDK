@@ -18,7 +18,7 @@
 
 Add this line to your `build.gradle` file:
 ```Gradle
-compile 'com.estimote:proximity-sdk:0.1.0-alpha.6'
+compile 'com.estimote:proximity-sdk:0.1.0-alpha.7'
 ```
 Note: this is a pre-release version of Estimote Proximity SDK for Android.
 
@@ -57,7 +57,7 @@ The `ProximityObserver` is the main object for performing proximity observations
 ```Kotlin
 // Kotlin
 val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE , YOUR_APP_TOKEN_HERE)
-proximityObserver = ProximityObserverBuilder(applicationContext, cloudCredentials)
+val proximityObserver = ProximityObserverBuilder(applicationContext, cloudCredentials)
                 .withBalancedPowerMode()
                 .withOnErrorAction { /* handle errors here */ }
                 .build()
