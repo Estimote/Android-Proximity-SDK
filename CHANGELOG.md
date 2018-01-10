@@ -1,5 +1,11 @@
 Changelog
 =====================
+## 0.1.0-alpha.7 (Jan 10, 2018)
+
+- Added a possibility to access entire beacon's attachment payload as Map using `getPayload()` method in `ProximityAttachment` (e.g. for use in onEnterAction).
+
+- Marks `hasPair()`  in `ProximityAttachment` as deprecated - get entire payload and use Map access methods instead.
+
 ## 0.1.0-alpha.6 (Dec 12, 2017)
 
 - `ProximityObserverFactory` is now `ProximityObserverBuilder`
