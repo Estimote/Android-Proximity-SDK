@@ -18,7 +18,7 @@
 
 Add this line to your `build.gradle` file:
 ```Gradle
-compile 'com.estimote:proximity-sdk:0.1.0-alpha.7'
+compile 'com.estimote:proximity-sdk:0.1.0-alpha.8'
 ```
 Note: this is a pre-release version of Estimote Proximity SDK for Android.
 
@@ -172,8 +172,43 @@ protected void onDestroy() {
     super.onDestroy();
 }
 ```
-## Background scanning
-It is now possible to scan when the app is in the background (or even killed), but it needs to be handled properly according to the Android official guidelines. Please, read the explanation below:
+
+# Additional features
+
+## Scanning for Estimote Telemetry
+*Use case: Getting sensors data from your Estimote beacons.*
+
+You can easily scan for raw `Estimote Telemetry` packets that contain your beacons' sensor data. All this data is broadcasted in the two separate sub-packets, called `frame A` and `frame B`. Our SDK allows you to scan for both of them separately, or to scan for the whole merged data at once (containing frame A and B data, and also the full device identifier).
+Here is how to launch scanning for full telemetry data:
+
+``` Kotlin
+// KOTLIN
+ bluetoothScanner = EstimoteBluetoothScannerFactory(applicationContext).getSimpleScanner()
+        telemetryFullScanHandler =
+                bluetoothScanner
+                        .estimoteTelemetryFullScan()
+                        .withOnPacketFoundAction {
+                            Log.d("Full Telemetry", "Got Full Telemetry packet: $it") 
+                        }
+                        .withOnScanErrorAction { 
+                            Log.e("Full Telemetry", "Full Full Telemetry scan failed: $it") 
+                        }
+                        .start()
+```
+You can use `telemetryFullScanHandler.stop()` to stop the scanning. Similarily to the `ProximityObserver` you can also start this scan in the foreground service using `getScannerWithForegroundService(notification)` method instead of `.getSimpleScanner()`.
+
+Basic info about possible scanning modes:
+
+`estimoteTelemetryFullScan()` - contains merged data from frame A and B, as well as full device id. Will be less frequently reported than individual frames.
+`estimoteTelemetryFrameAScan()` - data from frame A + short device id. Reported on every new frame A.
+`estimoteTelemetryFrameBScan()` - data from frame B + short device id. Reported on every new frame B.
+
+> Tip: Read more about the Estimote Telemetry protocol specification [here](https://github.com/Estimote/estimote-specs/blob/master/estimote-telemetry.js). You can also check [our tutorial](http://developer.estimote.com/sensors/android-things/) about how to use the telemetry scanning on your Android Things device (RaspberryPi 3.0 for example).  
+
+## Background scanning using foreground service
+*Use case: Scanning when your app is in the background (not yet killed). Scanning attached to the notification object even when all activities are destroyed.*
+
+It is now possible to scan when the app is in the background, but it needs to be handled properly according to the Android official guidelines. 
 
 > IMPORTANT: Launching "silent bluetooth scan" without the knowledge of the user is not permitted by the system - if you do so, your service might be killed in any moment, without your permission. We don't want this behaviour, so we decided to only allow scanning in the background using a foreground service with a notification. You can implement your own solution, based on any kind of different service/API, but you must bear in mind, that the system might kill it if you don't handle it properly. 
 
@@ -190,9 +225,45 @@ val notification = Notification.Builder(this)
 
 2. Use ` .withScannerInForegroundService(notification)` when building `ProximityObserver` via `ProximityObserverBuilder`:
 
-3. To keep scanning active while the user is not in your app (home button pressed) put start/stop in `onCreate()`/`onDestroy()` of your desired **ACTIVITY**. 
+3. To keep scanning active while the user is not in your activity (home button pressed) put start/stop in `onCreate()`/`onDestroy()` of your desired **ACTIVITY**. 
 
-4. To scan even after the user has killed your app (swipe in app manager) put start/stop in `onCreate()`/`onDestroy()` of your **CLASS EXTENDING APPLICATION CLASS**. You will also need to handle stopping scan through the notification, because even though the user will destroy the activity, the notification (foregrounbd service) will still remain visible. You can play with it and see the behaviour by yourself. Please, read more in [official android documentation](https://developer.android.com/training/notify-user/build-notification.html) about managing notification objects. 
+4. To scan even after the user has killed your activity (swipe in app manager) put start/stop in `onCreate()`/`onDestroy()` of your **CLASS EXTENDING APPLICATION CLASS**. 
+
+> Tip: You can control the lifecycle of scanning by starting/stopping it in the different places of your app. If you happen to  never stop it, the underlying `foreground service` will keep running, and the notification will be still visible to the user. If you want such behaviour, remember to initialize the `notification` object correctly - add button to it that stops the service. Please, read more in the [official android documentation](https://developer.android.com/training/notify-user/build-notification.html) about managing notification objects. 
+
+## Background scanning using Proximity Trigger (Android 8.0+)
+*Use case: Displaying your notification when user enters the zone while having your app KILLED - the notification allows him to open your app (if you create it in such way). Triggering your `PendingIntent` when user enters the zone.*
+
+Since Android version 8.0 there is a possibility to display a notification to the user when he enters the specified zone. This may allow him to open your app (by clicking the notification for example) that will start the proper foreground scanning.  
+You can do this by using our `ProximityTrigger`, and here is how:
+
+1. Declare an notification object like this: 
+``` Kotlin
+// KOTLIN
+val notification = Notification.Builder(this)
+              .setSmallIcon(R.drawable.notification_icon_background)
+              .setContentTitle("Beacon scan")
+              .setContentText("Scan is running...")
+              // you can add here an action to open your app when user clicks the notification
+              .setPriority(Notification.PRIORITY_HIGH)
+              .build()
+``` 
+> Tip: Remember that on Android 8.0 you will also need to create a notification channel. [Read more here](https://developer.android.com/training/notify-user/build-notification.html).
+
+2. Use `ProximityTriggerBuilder` to build `ProximityTrigger`:
+
+``` Kotlin 
+// KOTLIN
+val triggerHandle = ProximityTriggerBuilder(applicationContext)
+                .displayNotificationWhenInProximity(notification)
+                .build()
+                .start()
+```
+This will register the notification to be invoked when the user enters the zone of your beacons. You can use the `triggerHandle` to call `stop()` - this will deregister the system callback for you. 
+
+Also, bear in mind, that the system callback **may be invoked many times**, thus displaying your notification again and again. In order to avoid this problem, you should add a button to your notification that will call `trigger.stop()` to stop the system scan. On the other hand, you can use `displayOnlyOnce()` method when building the `ProximityTrigger` object - this will fire your notification only once, and then you will need to call `start()` again.
+
+> Known problems: The scan registraton gets cancelled when user disables bluetooth and WiFi on his phone. After that, the trigger may not work, and your app will need to be opened once again to reschedule the `ProximityTrigger`.
 
 ## Example app
 
