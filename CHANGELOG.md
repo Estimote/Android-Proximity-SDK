@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.1.0-alpha.8 (Jan 16. 2018)
+- Added `ProximityTrigger` for displaying notification from your app when user enters the proximity zone. It can be accessed using `ProximityTriggerBuilder`.
+
 ## 0.1.0-alpha.7 (Jan 10, 2018)
 
 - Added a possibility to access entire beacon's attachment payload as Map using `getPayload()` method in `ProximityAttachment` (e.g. for use in onEnterAction).
