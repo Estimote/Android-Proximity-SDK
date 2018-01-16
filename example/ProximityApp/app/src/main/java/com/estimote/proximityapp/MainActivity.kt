@@ -1,8 +1,12 @@
 package com.estimote.proximityapp
 
 import android.app.Notification
+import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.estimote.cloud_plugin.common.EstimoteCloudCredentials
 import com.estimote.internal_plugins_api.cloud.proximity.ProximityAttachment
@@ -10,7 +14,9 @@ import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory
 import com.estimote.proximity_sdk.proximity.ProximityObserver
 import com.estimote.proximity_sdk.proximity.ProximityObserverBuilder
+import com.estimote.proximity_sdk.trigger.ProximityTriggerBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 /**
  * Proximity SDK example.
@@ -25,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     // In order to run this example you need to create an App in your Estimote Cloud account and put here your AppId and AppToken
     // ============
-    // THIS WILL NOT COMPILE UNLESS YOU PUT PROPER VALUES. SEE ABOVE FOR MORE DETAILS.
-    private val cloudCredentials = EstimoteCloudCredentials(PUT_YOUR_APP_ID_STRING_HERE, PUT_YOUR_APP_TOKEN_STRING_HERE)
+    // THIS WILL NOT COMPILE UNLESS YOU PUT THE PROPER VALUES. SEE ABOVE FOR MORE DETAILS.
+    private val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE, YOUR_APP_TOKEN_HERE)
     // ============
 
     // Actions to trigger
@@ -39,22 +45,18 @@ class MainActivity : AppCompatActivity() {
     private val displayToastAboutMissingRequirements: (List<Requirement>) -> Unit = { Toast.makeText(this, "Unable to start proximity observation. Requirements not fulfilled: ${it.size}", Toast.LENGTH_SHORT).show() }
     private val displayToastAboutError: (Throwable) -> Unit = { Toast.makeText(this, "Error while trying to start proximity observation: ${it.message}", Toast.LENGTH_SHORT).show() }
 
-    // Notification about pending BLE scanning to display in notification bar
     private lateinit var notification: Notification
-    // Estimote's main object for doing proximity observations
     private lateinit var proximityObserver: ProximityObserver
-    // Handler to stop the observation. You will get this Handler after starting observation, don't worry.
-    private lateinit var proximityObservationHandler: ProximityObserver.Handler
+    private var proximityObservationHandler: ProximityObserver.Handler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // Take a look at NotificationCreator class which handles different OS versions
-        notification = NotificationCreator().create(this)
+        notification = NotificationCreator().createNotification(this)
         mint_image.setColor(R.color.mint_cocktail)
         blueberry_image.setColor(R.color.blueberry_muffin)
         venue_image.setColor(R.color.icy_marshmallow)
-
         // Proximity observation has some requirements to be fulfilled in order to scan for beacons:
         // Bluetooth needs to be enabled, Location Permissions must be granted by the user,
         // Device must support Bluetooth Low Energy, and so. This is why we created RequirementsWizard.
@@ -64,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(
                 this,
                 onRequirementsFulfilled = { startProximityObservation() },
-                onRequirementsMissing =  displayToastAboutMissingRequirements,
+                onRequirementsMissing = displayToastAboutMissingRequirements,
                 onError = displayToastAboutError
         )
     }
@@ -125,6 +127,7 @@ class MainActivity : AppCompatActivity() {
                 .start()
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         // After starting your scan, the Proximity Observer will return you a handler to stop the scanning process.
@@ -132,7 +135,60 @@ class MainActivity : AppCompatActivity() {
         // IMPORTANT:
         // If you don't stop the scan here, the foreground service will remain active EVEN if the user kills your APP.
         // You can use it to retain scanning when app is killed, but you will need to handle actions properly.
-        proximityObservationHandler.stop()
+        proximityObservationHandler?.stop()
     }
+
+
+    // ===
+    // THE CODE BELOW SHOWS HOW TO SETUP THE PROXIMITY TRIGGER FOR ANDROID 8.0+ DEVICES
+    // ===
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_trigger ->
+                showTriggerSetupDialog().let { true }
+            else ->
+                super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    private fun showTriggerSetupDialog() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            Toast.makeText(this, "ProximityTrigger works only on devices with Android 8.0+", Toast.LENGTH_SHORT).show()
+        } else {
+            createTriggerDialog().show()
+        }
+    }
+
+    private fun createTriggerDialog() =
+            AlertDialog.Builder(this)
+                    .setTitle("ProximityTrigger setup")
+                    .setMessage("The ProximityTrigger will display your notification when the user" +
+                            " has entered the proximity of beacons. " +
+                            "You can leave your beacons range, enable the trigger, kill your app, " +
+                            "and go back - see what happens!")
+                    .setPositiveButton("Enable", { _, _ ->
+                        val notification = NotificationCreator().createTriggerNotification(this)
+                        ProximityTriggerBuilder(this)
+                                .displayNotificationWhenInProximity(notification)
+                                .build()
+                                .start()
+                        Toast.makeText(this, "Trigger enabled!", Toast.LENGTH_SHORT).show()
+                    })
+                    .setNegativeButton("Disable", { _, _ ->
+                        val notification = NotificationCreator().createTriggerNotification(this)
+                        ProximityTriggerBuilder(this).displayNotificationWhenInProximity(notification)
+                                .build()
+                                .start().stop()
+                        Toast.makeText(this, "Trigger disabled.", Toast.LENGTH_SHORT).show()
+                    }).create()
+
 
 }

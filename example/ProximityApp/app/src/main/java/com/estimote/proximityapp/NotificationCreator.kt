@@ -2,7 +2,9 @@ package com.estimote.proximityapp
 
 import android.app.Notification
 import android.app.NotificationChannel
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
@@ -19,30 +21,27 @@ class NotificationCreator {
     private val CHANNEL_ID = "ESTIMOTE_SCAN"
     private val CHANNEL_NAME = "Estimote bluetooth scan notifications"
     private val CHANNEL_DESCRIPTION = "Blah blah blah"
-    private val NOTIFICATION_TITLE = "Estimote Inc. \u00AE"
-    private val NOTIFICATION_TEXT = "Scan is running..."
 
-    fun create(context: Context): Notification =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationForOreo(context)
-            else createNotificationForPreOreo(context)
-
-    private fun createNotificationForPreOreo(context: Context): Notification {
+    fun createTriggerNotification(context: Context): Notification {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel(context)
         return NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.beacon_gray)
-                .setContentTitle(NOTIFICATION_TITLE)
-                .setContentText(NOTIFICATION_TEXT)
+                .setContentTitle("Proximity App")
+                .setContentText("You are in the beacons range! Click here to run our app!")
+                .setContentIntent(PendingIntent.getActivity(context, 234235, Intent(context, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT))
                 .build()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationForOreo(context: Context): Notification {
-        createNotificationChannel(context)
-        return Notification.Builder(context, CHANNEL_ID)
+
+    fun createNotification(context: Context): Notification {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel(context)
+        return NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.beacon_gray)
-                .setContentTitle(NOTIFICATION_TITLE)
-                .setContentText(NOTIFICATION_TEXT)
+                .setContentTitle("Estimote Inc. \u00AE")
+                .setContentText( "Scan is running...")
                 .build()
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(context: Context) {

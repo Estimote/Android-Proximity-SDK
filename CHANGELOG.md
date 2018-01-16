@@ -1,6 +1,9 @@
 Changelog
 =====================
-## 0.1.0-alpha.8 (Jan 16. 2018)
+## 0.1.0-alpha.9 (Jan 16. 2018)
+- Hot-fix for `ProximityTrigger.Handler` where calling `stop()` caused crash.
+
+## 0.1.0-alpha.8 (Jan 15. 2018)
 - Added `ProximityTrigger` for displaying notification from your app when user enters the proximity zone. It can be accessed using `ProximityTriggerBuilder`.
 
 ## 0.1.0-alpha.7 (Jan 10, 2018)
