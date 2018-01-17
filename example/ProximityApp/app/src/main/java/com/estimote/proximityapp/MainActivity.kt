@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 // you might notice that we no longer allow to setup exact scan time periods.
                 // This caused many misconceptions and from now on we will handle the proper scan setup for you.
                 // This is cool, isn't it? Tell us what you think about it!
-                .withBalancedPowerMode()
+                .withLowLatencyPowerMode()
                 // Analytics data (current visitors in your zones, number of enters, etc) )is sent to our cloud by default. Uncomment the line below to turn it off.
 //                .withAnalyticsReportingDisabled()
                 // Telemetry reporting - enabling this will send telemetry data from your beacons, such as light level, or temperature, to our cloud.
