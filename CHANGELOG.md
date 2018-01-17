@@ -1,6 +1,10 @@
 Changelog
 =====================
-## 0.1.0-alpha.9 (Jan 16. 2018)
+## 0.2.0 (Jan 17, 2018)
+- Attachments are now resolved from dedicated cloud `Beacon Attachment tab`, and no more from JSON strings coded as tags.
+- Deprecated `forAttachmentKey("yourKey")` when creating `ProximityZone`. Now you need to use key:value pairs. Using deprecated method will work as calling `forAttachmentKeyAndValue("yourKey", "")`
+
+## 0.1.0-alpha.9 (Jan 16, 2018)
 - Hot-fix for `ProximityTrigger.Handler` where calling `stop()` caused crash.
 
 ## 0.1.0-alpha.8 (Jan 15. 2018)
