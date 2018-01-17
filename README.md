@@ -22,34 +22,20 @@ implementation 'com.estimote:proximity-sdk:0.1.0-alpha.9'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
-Note: this is a pre-release version of Estimote Proximity SDK for Android.
-
 ## Attachment-based identification explanation
 
 Details of each of your Estimote devices are available in Estimote Cloud. Each device has a unique identifier, but remembering it and using it for every one of your devices can be challenging. This is why Estimote Proximity SDK uses attachment-based identification.
 
-Each device has an associated JSON. When the SDK detects a change in the proximity to a device, it checks the device's attachment JSON to see which of the registered rules should be applied.
-
-During the pre-release stage of Estimote Proximity SDK, attachment JSONs are encoded in tags. The convention for a tag-encoded attachment is
-
-```
-{
-    "attachment" : {
-        // Attachment JSON goes here.
-        // You can put here any JSON you wish to use in your apps.
-    }
-}
-```
+Each device has an associated attachment. When the SDK detects a change in the proximity to a device, it checks the device's attachment to see which of the registered rules should be applied.
 
 ## 0. Setting up attachments in your Estimote Cloud account
 1. Go to https://cloud.estimote.com/#/
 2. Click on the beacon you want to configure
 3. Click the Edit settings button
-4. Click the Tags field
-5. Click the Create New Tag button
-6. Paste in the JSON with attachment that's going to represent your beacon
+4. Click the Beacon Attachment tab
+5. Add any attachment key-value pair you want
 7. Click Save changes
-Tags are Cloud-only settings — no additional connecting to the beacons with the Estimote app is required.
+Attachments are Cloud-only settings — no additional connecting to the beacons with the Estimote app is required!
 
 ![Cloud attachments](/images/adding_attachment_json_tag.png)
 
@@ -130,7 +116,6 @@ ProximityZone venueZone =
         .create();
 ```
 You zones can be defined with the below options: 
-- **forAttachmentKey** - the key you want to trigger actions for. Value is omitted when checking the predicate (wildcard).
 - **forAttachmentKeyAndValue** - the exact key and value that will trigger this zone actions. 
 - **onEnterAction** - the action that will be triggered when the user enters the zone  
 - **onExitAction** - the action that will be triggered when the user exits the zone.
@@ -277,10 +262,10 @@ To get a working prototype, check out the [example app](https://github.com/Estim
 
 The demo requires at least two Proximity or Location beacons configured for Estimote Monitoring. It's enabled by default in dev kits shipped after mid-September 2017; to enable it on your own check out the [instructions](https://community.estimote.com/hc/en-us/articles/226144728-How-to-enable-Estimote-Monitoring-).
 
-The demo expects beacons having specific tags assigned:
+The demo expects beacons having specific attachments assigned:
 
-- `{"attachment":{"venue":"office","desk":"mint"}}` for the first one,
-- `{"attachment":{"venue":"office","desk":"blueberry"}}` for the second one.
+- `venue`:`office` and `desk`:`mint` for the first one,
+- `venue`:`office` and `desk`:`blueberry` for the second one.
 
 
 ## Documentation
