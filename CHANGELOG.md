@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.2.1 (Jan 31, 2018)
+- Fixed a bug when attachments with the same key were not resolved.
+
 ## 0.2.0 (Jan 17, 2018)
 - Attachments are now resolved from dedicated cloud `Beacon Attachment tab`, and no more from JSON strings coded as tags.
 - Deprecated `forAttachmentKey("yourKey")` when creating `ProximityZone`. Now you need to use key:value pairs. Using deprecated method will work as calling `forAttachmentKeyAndValue("yourKey", "")`
