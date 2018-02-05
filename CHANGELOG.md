@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.2.2 (Feb 05, 2018)
+- Fixed [#6](https://github.com/Estimote/Android-Proximity-SDK/issues/6) where `IllegalStateException` was thrown when trying to stop scanning while bluetooth adapter was null/not started. This exception is now being catched and an warning log will be printed - you can handle this case in your `withOnErrorAction` in `ProximityObserver`.
+
 ## 0.2.1 (Jan 31, 2018)
 - Fixed a bug when attachments with the same key were not resolved.
 
