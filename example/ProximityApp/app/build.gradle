@@ -24,14 +24,14 @@ android {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 
     // Our Proximity SDK
-    compile 'com.estimote:proximity-sdk:0.2.0'
+    compile 'com.estimote:proximity-sdk:0.2.2'
     // Our support library with Android UI handy components. We will use EstimoteRequirementsWizard from there.
     compile 'com.estimote:mustard:0.2.0'
     implementation 'com.android.support:design:27.0.2'
