@@ -32,7 +32,7 @@ dependencies {
     compileOnly 'com.google.android.things:androidthings:+'
 
     // ESTIMOTE PROXIMITY SDK DEPENDENCY
-    implementation 'com.estimote:proximity-sdk:0.2.2'
+    implementation 'com.estimote:proximity-sdk:0.2.3'
 
     // ESTIMOTE UTILITY LIBRARY THAT CONTAINS REQUIREMENTS WIZARD
     implementation "com.estimote:mustard:0.3.0"
