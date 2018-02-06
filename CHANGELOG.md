@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.2.3 (Feb 06, 2018)
+- Hotfix for `NoSuchMethodError` being thrown when starting observation. 
+
 ## 0.2.2 (Feb 05, 2018)
 - Fixed [#6](https://github.com/Estimote/Android-Proximity-SDK/issues/6) where `IllegalStateException` was thrown when trying to stop scanning while bluetooth adapter was null/not started. This exception is now being catched and an warning log will be printed - you can handle this case in your `withOnErrorAction` in `ProximityObserver`.
 
