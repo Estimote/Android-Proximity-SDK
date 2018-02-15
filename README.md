@@ -70,8 +70,9 @@ You can customize your `ProximityObject` using the available options:
 - **withLowPowerMode** - battery efficient mode, but not that reliable.
 - **withOnErrorAction** - action triggered when any error occurs - such as cloud connection problems, scanning, etc.
 - **withScannerInForegroundService** - starts the observation proces with scanner wrapped in [foreground service](https://developer.android.com/guide/components/services.html). This will display notification in user's notifications bar, but will ensure that the scanning won't be killed by the system. **Important:** Your scanning will be handled without the foreground service by default. 
-- **withTelemetryReporting** - Enabling this will send telemetry data from your beacons, such as light level, or temperature, to our cloud. This is also an important data for beacon health check (such as tracking battery life for example). Bear in mind that enabling this will slightly increase battery drain. 
+- **withTelemetryReportingDisabled** - `ProximityObserver` will automatically send telemetry data from your beacons, such as light level, or temperature, to our cloud. This is also an important data for beacon health check (such as tracking battery life for example).
 - **withAnalyticsReportingDisabled** - Analytic data (current visitors in your zones, number of enters, etc) ) is sent to our cloud by default. Use this to turn it off.
+- **withEstimoteSecureMonitoringDisabled** - using this will disable scanning for encrypted Estimote packets. `ProximityObserver` will not try to resolve encrypted packets using Estimote Secure Monitoring protocol. Only unencrypted packets will be observed.
 
 ## 2. Define proximity zones
 Now for the fun part - create your own proximity zones using `proximityObserver.zoneBuilder()`
