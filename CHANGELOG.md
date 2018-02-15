@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 0.3.0 (Feb 15, 2018)
+- Added Estimote Secure Monitoring support. `ProximityObserver` now observes for both encrypted and unencrypted Estimote packets. You can disable this using `.withEstimoteSecureMonitoringDisabled()` when building your `ProximityObserver`.
+- Telemetry reporting is now enabled by default. Use `.withTelemetryReportingDisabled()` to disable it. 
+
 ## 0.2.3 (Feb 06, 2018)
 - Hotfix for `NoSuchMethodError` being thrown when starting observation. 
 
