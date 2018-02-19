@@ -31,7 +31,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     // Our Proximity SDK
-    compile 'com.estimote:proximity-sdk:0.3.0'
+    compile 'com.estimote:proximity-sdk:0.3.1'
     // Our support library with Android UI handy components. We will use EstimoteRequirementsWizard from there.
     compile 'com.estimote:mustard:0.2.0'
     implementation 'com.android.support:design:27.0.2'
