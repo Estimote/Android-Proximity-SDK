@@ -1,5 +1,12 @@
 Changelog
 =====================
+## 0.3.2 (Feb 23, 2018)
+- **Breaking changes**: Changed module name `scanning-sdk` to `scanning-plugin`. If you used `BluetoothScanner` class you might need to update your imports. 
+- Added support for phones not supporting offloaded hardware filtering. This doesn't fix error code -99 related issues for now.
+- Fixed wrong timeout unit (always SECONDS) in launching scans with timeout in `BluetoothScanner`
+- Added cache-related improvements to Estmote Secure Monitoring
+- `onExit` events are now being reported if beacon signal is completely lost. The delay will by slightly longer than time for typical `onExit` invocation. 
+
 ## 0.3.1 (Feb 19, 2018)
 - Added missing plugin dependency
 
