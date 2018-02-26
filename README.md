@@ -253,6 +253,32 @@ Also, bear in mind, that the system callback **may be invoked many times**, thus
 
 > Known problems: The scan registraton gets cancelled when user disables bluetooth and WiFi on his phone. After that, the trigger may not work, and your app will need to be opened once again to reschedule the `ProximityTrigger`.
 
+## Checking requirements with RequirementsWizard
+*Use case: Making sure that everything needed for the Bluetooth scanning to work is set up - the user has Bluetooth enabled, location permissions were granted, etc. Displaying default popup dialogs to enable Bluetooth and give needed permissions.*
+
+The `ProximityObserver` won't work without the certain requirements fulfilled. Bluetooth needs to be enabled on a phone, Location permissions need to be granted, etc. You can do this either manually, by checking this before starting the `ProximityObserver`, or use our support library named **Mustard**, which contains handy Kotlin recipes for Android's UI-related stuff. 
+The `RequirementsWizard` comes in handy, when you need to check all the necessary requirements. It will automatically display default dialogs for the user to enable needed stuff (like bluetooth) for you. 
+
+1. Add our `Mustard` support library to your module's `build.gradle` file:
+
+```Gradle
+implementation 'com.estimote:mustard:0.2.1'
+```
+
+2. Use `RequirementsWizard` **before** starting the `ProximityObserver`:
+
+``` Kotlin
+RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(
+            YOUR_ACTIVITY_CONTEXT_HERE,
+            onRequirementsFulfilled : { /* start the ProximityObserver here! */ },
+            onRequirementsMissing: { /* scanning won't work, handle this case in your app */ },
+            onError: { /* Oops, some error occurred, handle it here! */ })
+```
+
+> Why a separate library? - Mustard library depends on Android support libraries to display proper dialogs for the user. Some of you might don't want to add additional Android support libraries to your project, or some unwanted version confilicts might appear. This is why we decided to keep it as a separate thing. 
+
+> Why "Mustard"? - The name "Kotlin" is coincidentally the same as the popular brand of ketchup in Poland. This is why we named our first support library "Ketchup". It's basically a place for our Kotlin/RX utils shared across our stack. When we decided to create a separate library for UI-related stuff, we thought of how much we love hot-dogs. And you know, hot-dogs come best with both ketchup and mustard :)
+
 ## Example app
 
 To get a working prototype, check out the [example app](https://github.com/Estimote/Android-Proximity-SDK/tree/master/example/ProximityApp). It's a single screen app with three labels that change the background color when:
