@@ -268,11 +268,41 @@ implementation 'com.estimote:mustard:0.2.1'
 2. Use `RequirementsWizard` **before** starting the `ProximityObserver`:
 
 ``` Kotlin
+// KOTLIN
 RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(
             YOUR_ACTIVITY_CONTEXT_HERE,
             onRequirementsFulfilled : { /* start the ProximityObserver here! */ },
             onRequirementsMissing: { /* scanning won't work, handle this case in your app */ },
             onError: { /* Oops, some error occurred, handle it here! */ })
+```
+
+``` Java
+// JAVA
+RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(
+      this, 
+      new Function0<Unit>() {
+        @Override
+        public Unit invoke() {
+          proximityObserver.addProximityZone(venueZone).start();
+          return null;
+        }
+      },
+
+      new Function1<List<? extends Requirement>, Unit>() {
+        @Override
+        public Unit invoke(List<? extends Requirement> requirements) {
+          /* scanning won't work, handle this case in your app */
+          return null;
+        }
+      },
+
+      new Function1<Throwable, Unit>() {
+        @Override
+        public Unit invoke(Throwable throwable) {
+          /* Oops, some error occurred, handle it here! */ }
+          return null;
+        }
+      });
 ```
 
 > Why a separate library? - Mustard library depends on Android support libraries to display proper dialogs for the user. Some of you might don't want to add additional Android support libraries to your project, or some unwanted version confilicts might appear. This is why we decided to keep it as a separate thing. 
