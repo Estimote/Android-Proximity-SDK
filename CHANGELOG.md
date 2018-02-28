@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 0.3.3 (Feb 28, 2018)
+- Fixed `IllegalArgumentsException: null notification` in foreground service when disabling location permission.
+- Added warning when no attachments were found in cloud for defined proximity zones. 
+
 ## 0.3.2 (Feb 23, 2018)
 - **Breaking changes**: Changed module name `scanning-sdk` to `scanning-plugin`. If you used `BluetoothScanner` class you might need to update your imports. 
 - Added support for phones not supporting offloaded hardware filtering. This doesn't fix error code -99 related issues for now.
