@@ -331,7 +331,7 @@ Javadoc documentation available soon...
 ## Your feedback and questions
 At Estimote we're massive believers in feedback! Here are some common ways to share your thoughts with us:
   - Posting issue/question/enhancement on our [issues page](https://github.com/Estimote/Android-Proximity-SDK/issues).
-  - Asking our community managers on our [Estimote SDK for Android forum](https://forums.estimote.com/c/android-sdk).
+  - Asking our community managers on our [Estimote SDK for Android forum](https://forums.estimote.com/).
   - Keep up with the development progress reports [in this thread on our forums](https://forums.estimote.com/t/changes-to-android-sdk-current-progress/7450). 
 
 ## Changelog
