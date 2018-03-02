@@ -3,9 +3,9 @@ package com.estimote.estimotethings
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import com.estimote.internal_plugins_api.scanning.BluetoothScanner
+import com.estimote.internal_plugins_api.scanning.ScanHandler
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory
-import com.estimote.scanning_sdk.api.EstimoteBluetoothScannerFactory
+import com.estimote.scanning_plugin.api.EstimoteBluetoothScannerFactory
 
 /**
  * This use case is about temperature. Put your beacon identifier here, as well as desired pin to set to high state.
@@ -17,7 +17,7 @@ import com.estimote.scanning_sdk.api.EstimoteBluetoothScannerFactory
 class TemperatureDemoActivity : Activity() {
 
     private val TAG = TemperatureDemoActivity::class.java.simpleName
-    private var scanHandle: BluetoothScanner.ScanHandler? = null
+    private var scanHandle: ScanHandler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
