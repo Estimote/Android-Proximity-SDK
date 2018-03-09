@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityObserver.ProximityZoneRangeBuilder - proximity-sdk</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../../index.html">com.estimote.proximity_sdk.proximity</a>&nbsp;/&nbsp;<a href="../index.html">ProximityObserver</a>&nbsp;/&nbsp;<a href="./index.html">ProximityZoneRangeBuilder</a><br/>
+<br/>
+<h1>ProximityZoneRangeBuilder</h1>
+<code><span class="keyword">interface </span><span class="identifier">ProximityZoneRangeBuilder</span></code>
+<p>A fluent builder API sub-class for configuring <a href="../../-proximity-zone/index.html">ProximityZone</a>'s trigger distance.</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="in-custom-range.html">inCustomRange</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">inCustomRange</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.proximity.ProximityObserver.ProximityZoneRangeBuilder$inCustomRange(kotlin.Double)/desiredMeanTriggerDistance">desiredMeanTriggerDistance</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-proximity-zone-builder/index.html"><span class="identifier">ProximityZoneBuilder</span></a></code>
+<p>Zone's onEnter/onExit actions will be invoked in the custom range.
+The precision is difficult to predict due to a nature of the radio waves,
+so the actual invocation might occur within the defined custom range
+with a few meters margin.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="in-far-range.html">inFarRange</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">inFarRange</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-proximity-zone-builder/index.html"><span class="identifier">ProximityZoneBuilder</span></a></code>
+<p>Zone's onEnter/onExit actions will be invoked in the <em>FAR</em> range.
+The precision is difficult to predict due to a nature of the radio waves.
+Basically, the <em>FAR</em> range should vary between 4 - 7 meters from a beacon.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="in-near-range.html">inNearRange</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">inNearRange</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-proximity-zone-builder/index.html"><span class="identifier">ProximityZoneBuilder</span></a></code>
+<p>Zone's onEnter/onExit actions will be invoked in the <em>NEAR</em> range.
+The precision is difficult to predict due to a nature of the radio waves.
+Basically, the <em>NEAR</em> range should vary between 0 - 2 meters from a beacon.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

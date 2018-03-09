@@ -1,0 +1,49 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityAttachment - proximity-sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.proximity_sdk.proximity</a>&nbsp;/&nbsp;<a href="./index.html">ProximityAttachment</a><br/>
+<br/>
+<h1>ProximityAttachment</h1>
+<code><span class="keyword">interface </span><span class="identifier">ProximityAttachment</span></code>
+<p>Data attached to the one beacon. You will get this in your defined actions when user enters/exits your zone.</p>
+<p><strong>Author</strong><br/>
+Estimote Inc. (contact@estimote.com)</p>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="get-device-id.html">getDeviceId</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getDeviceId</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>Returns the raw device identifier that has this attachment associated.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="get-payload.html">getPayload</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">getPayload</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html"><span class="identifier">Map</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>Gives access to the complete payload of this attachment. You can navigate through it using
+<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a> object.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="has-attachment.html">hasAttachment</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">hasAttachment</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Returns true if the attachment is not empty.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

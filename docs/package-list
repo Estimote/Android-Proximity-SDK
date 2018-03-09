@@ -1,0 +1,6 @@
+$dokka.format:html
+$dokka.linkExtension:html
+
+com.estimote.proximity_sdk.exception
+com.estimote.proximity_sdk.proximity
+com.estimote.proximity_sdk.trigger
