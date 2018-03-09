@@ -18,7 +18,7 @@
 
 Add this line to your `build.gradle` file:
 ```Gradle
-implementation 'com.estimote:proximity-sdk:0.3.3'
+implementation 'com.estimote:proximity-sdk:0.4.0'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
@@ -326,7 +326,7 @@ The demo expects beacons having specific attachments assigned:
 
 
 ## Documentation
-Javadoc documentation available soon...
+Our Kdoc is available [here](https://estimote.github.io/Android-Proximity-SDK/.).
 
 ## Your feedback and questions
 At Estimote we're massive believers in feedback! Here are some common ways to share your thoughts with us:
