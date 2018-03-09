@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 0.4.0 (Mar 8, 2018)
+- **Breaking changes**: Changed `EstimoteCloudCredentials` and `ProximityAttachment` packageges to `proximity_sdk.proximity` package. This should allow you to have all our classes in one package, so only one import will be necessary. You should fix your imports after updating to this version. *Disclaimer: We're doing such changes only throughout the beta (0.x.x.) releases. This won't take place in the full release after `1.0.0` anymore - I promise :)*
+- Fixed [#32](https://github.com/Estimote/Android-Proximity-SDK/issues/32) where NPE was throw from `TriggerBroadcastReceiver` without even using it. 
+
 ## 0.3.3 (Feb 28, 2018)
 - Fixed `IllegalArgumentsException: null notification` in foreground service when disabling location permission.
 - Added warning when no attachments were found in cloud for defined proximity zones. 
