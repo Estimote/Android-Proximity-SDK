@@ -1,5 +1,10 @@
 Changelog
 =====================
+## 0.4.2 (Apr 5, 2018)
+- Fixed uncatched exception being thrown when scan error appeared. Now it is being correctly reported via `onErrorAction`.
+- Fixed problem with Notification being called many times when using `.withScannerInForegroundService(...)`
+- Starting `ProximityObserver` when Bluetooth is disabled now results in `onErrorAction` being called. 
+
 ## 0.4.1 (Mar 9, 2018)
 - Fixed unhandled crash when `onScanFailed` was being called from BLE stack on some phones. Now it is propagated properly to your `onErrorAction`. 
 
