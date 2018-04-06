@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.4.3 (Apr 6, 2018)
+- Included all the previous changes from 0.4.2 that were not introduced by mistake (I forgot to merge the feature branch, don't do it).
+
 ## 0.4.2 (Apr 5, 2018)
 - Fixed uncatched exception being thrown when scan error appeared. Now it is being correctly reported via `onErrorAction`.
 - Fixed problem with Notification being called many times when using `.withScannerInForegroundService(...)`
