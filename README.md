@@ -18,7 +18,7 @@
 
 Add this line to your `build.gradle` file:
 ```Gradle
-implementation 'com.estimote:proximity-sdk:0.4.2'
+implementation 'com.estimote:proximity-sdk:0.4.3'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
