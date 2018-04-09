@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.4.4 (Apr 9, 2018)
+- Added support for phones not supporting batch scanning. 
+
 ## 0.4.3 (Apr 6, 2018)
 - Included all the previous changes from 0.4.2 that were not introduced by mistake (I forgot to merge the feature branch, don't do it).
 
