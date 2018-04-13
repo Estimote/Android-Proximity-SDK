@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.estimote.cloud_plugin.common.EstimoteCloudCredentials
-import com.estimote.internal_plugins_api.cloud.proximity.ProximityAttachment
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory
+import com.estimote.proximity_sdk.proximity.EstimoteCloudCredentials
+import com.estimote.proximity_sdk.proximity.ProximityAttachment
 import com.estimote.proximity_sdk.proximity.ProximityObserver
 import com.estimote.proximity_sdk.proximity.ProximityObserverBuilder
 import com.estimote.proximity_sdk.trigger.ProximityTriggerBuilder
@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
     // THIS WILL NOT COMPILE UNLESS YOU PUT THE PROPER VALUES. SEE ABOVE FOR MORE DETAILS.
     private val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE, YOUR_APP_TOKEN_HERE)
     // ============
-
-    // Actions to trigger
+    
     private val makeMintDeskFilled: (ProximityAttachment) -> Unit = { _ -> mint_image.reveal() }
     private val makeMintDeskWhite: (ProximityAttachment) -> Unit = { mint_image.collapse() }
     private val makeBlueberryDeskFilled: (ProximityAttachment) -> Unit = { _ -> blueberry_image.reveal() }
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         // Proximity observation has some requirements to be fulfilled in order to scan for beacons:
         // Bluetooth needs to be enabled, Location Permissions must be granted by the user,
         // Device must support Bluetooth Low Energy, and so. This is why we created RequirementsWizard.
-        // He will check if everything is fine, and if not, he will display adequate dialogs to the user.
+        // It will check if everything is fine, and if not, it will display adequate dialogs to the user.
         // After all, you will be notified through one of the callbacks.
         // Let the magic happen!
         RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(
@@ -74,24 +73,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun startProximityObservation() {
         proximityObserver = ProximityObserverBuilder(applicationContext, cloudCredentials)
-                // Start scan in foreground service - it takes your notification and will handle scanning in the foreground service,
-                // so that the system won't kill your scanning as long as the user is playing with the app.
-                // You can also use .startWithSimpleScanner() which won't use any service for scan, and wont need notification object.
-                // This will cause your scan to stop when user exits your app (or shortly after).
-                // But you can use this method to implement some custom logic - maybe using your own service?
-                // Read more about handling background scanning here:
-                // https://github.com/Estimote/Android-Proximity-SDK#background-scanning
+                // Do scanning wrapped in the foreground service. If you want to write your custom logic,
+                // just don't use this method and implement your own service.
                 .withScannerInForegroundService(notification)
                 // Choose scan power mode - you can play with three different - low latency, low power, and balanced.
-                // The default mode is balanced. If you have used our old SDK before
-                // you might notice that we no longer allow to setup exact scan time periods.
-                // This caused many misconceptions and from now on we will handle the proper scan setup for you.
-                // This is cool, isn't it? Tell us what you think about it!
+                // The default mode is balanced. This is cool, isn't it? Tell us what you think about it!
                 .withLowLatencyPowerMode()
-                // Analytics data (current visitors in your zones, number of enters, etc) )is sent to our cloud by default. Uncomment the line below to turn it off.
+                // Analytics data (current visitors in your zones, number of enters, etc) ) is sent to our cloud by default.
+                // Uncomment the line below to turn it off.
 //                .withAnalyticsReportingDisabled()
-                // Telemetry reporting - enabling this will send telemetry data from your beacons, such as light level, or temperature, to our cloud.
-//                .withTelemetryReporting()
+                // Telemetry reporting allows to automatically push beacons' sensors data (and battery life) to the Estimote Cloud.
+                // Uncomment the line below to turn it off.
+//                .withTelemetryReportingDisabled()
+                // ProximityObserver scans also for secure Estimote packets and tries to resolve
+                // them in the Estimote Cloud. You can disable this behaviour
+                // if you want to reduce the network usage.
+                // Uncomment the line below to turn it off.
+//                .withEstimoteSecureMonitoringDisabled()
+                // All PO's errors will be delivered to this action, so you can handle it your own way.
+                .withOnErrorAction(displayToastAboutError)
                 .build()
 
 
@@ -130,11 +130,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        // After starting your scan, the Proximity Observer will return you a handler to stop the scanning process.
+        // After starting your scan, the Proximity Observer will return you a handler to stop the scanning.
         // We will use it here to stop the scan when activity is destroyed.
         // IMPORTANT:
-        // If you don't stop the scan here, the foreground service will remain active EVEN if the user kills your APP.
-        // You can use it to retain scanning when app is killed, but you will need to handle actions properly.
+        // If you don't stop the scan here, the foreground service will remain active EVEN
+        // if the user kills your activity.
+        // You can use it to retain scanning between activities, but you will need to handle actions properly.
         proximityObservationHandler?.stop()
     }
 
@@ -157,7 +158,6 @@ class MainActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
         }
     }
-
 
     private fun showTriggerSetupDialog() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
