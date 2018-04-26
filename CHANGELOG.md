@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 0.5.0 (Apr 26, 2018)
+- Added local persistance for cloud attachments. Now the `ProximityObserver` will fetch data from the cloud on every `start()` if the network is available. If not, it will use the locally persisted data. This way you can start scan without the internet access, provided that you have launched it at least once when network was available. 
+- Fixed [#45](https://github.com/Estimote/Android-Proximity-SDK/issues/45) where `UnhandledErrorException` was being thrown by our internal Analytics module on every proximity observation start. 
+
 ## 0.4.4 (Apr 9, 2018)
 - Added support for phones not supporting batch scanning. 
 
