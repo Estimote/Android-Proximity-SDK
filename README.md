@@ -18,7 +18,7 @@
 
 Add this line to your `build.gradle` file:
 ```Gradle
-implementation 'com.estimote:proximity-sdk:0.4.4'
+implementation 'com.estimote:proximity-sdk:0.5.0'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
@@ -308,6 +308,9 @@ RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements
 > Why a separate library? - Mustard library depends on Android support libraries to display proper dialogs for the user. Some of you might don't want to add additional Android support libraries to your project, or some unwanted version confilicts might appear. This is why we decided to keep it as a separate thing. 
 
 > Why "Mustard"? - The name "Kotlin" is coincidentally the same as the popular brand of ketchup in Poland. This is why we named our first support library "Ketchup". It's basically a place for our Kotlin/RX utils shared across our stack. When we decided to create a separate library for UI-related stuff, we thought of how much we love hot-dogs. And you know, hot-dogs come best with both ketchup and mustard :)
+
+## Handling offline work 
+Since the version `0.5.0` the `ProximityObserver` will persist necessary data locally, so that when there is no internet access, it may still be able to do proximity observation using that data. The only need is to call `proximityObserver.start()` **at least once** when the internet connection is available - it will fetch all the necessary data from the Estimote Cloud, and will store them locally for the later use.  
 
 ## Example app
 
