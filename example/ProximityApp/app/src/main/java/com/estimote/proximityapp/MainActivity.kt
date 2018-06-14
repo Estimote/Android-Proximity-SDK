@@ -10,10 +10,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory
-import com.estimote.proximity_sdk.proximity.EstimoteCloudCredentials
-import com.estimote.proximity_sdk.proximity.ProximityAttachment
-import com.estimote.proximity_sdk.proximity.ProximityObserver
-import com.estimote.proximity_sdk.proximity.ProximityObserverBuilder
+import com.estimote.proximity_sdk.proximity.*
 import com.estimote.proximity_sdk.trigger.ProximityTriggerBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -35,12 +32,12 @@ class MainActivity : AppCompatActivity() {
     private val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE, YOUR_APP_TOKEN_HERE)
     // ============
     
-    private val makeMintDeskFilled: (ProximityAttachment) -> Unit = { _ -> mint_image.reveal() }
-    private val makeMintDeskWhite: (ProximityAttachment) -> Unit = { mint_image.collapse() }
-    private val makeBlueberryDeskFilled: (ProximityAttachment) -> Unit = { _ -> blueberry_image.reveal() }
-    private val makeBlueberryDeskWhite: (ProximityAttachment) -> Unit = { blueberry_image.collapse() }
-    private val makeVenueFilled: (ProximityAttachment) -> Unit = { _ -> venue_image.reveal() }
-    private val makeVenueWhite: (ProximityAttachment) -> Unit = { venue_image.collapse() }
+    private val makeMintDeskFilled: (ProximityContext) -> Unit = { _ -> mint_image.reveal() }
+    private val makeMintDeskWhite: (ProximityContext) -> Unit = { mint_image.collapse() }
+    private val makeBlueberryDeskFilled: (ProximityContext) -> Unit = { _ -> blueberry_image.reveal() }
+    private val makeBlueberryDeskWhite: (ProximityContext) -> Unit = { blueberry_image.collapse() }
+    private val makeVenueFilled: (ProximityContext) -> Unit = { _ -> venue_image.reveal() }
+    private val makeVenueWhite: (ProximityContext) -> Unit = { venue_image.collapse() }
     private val displayToastAboutMissingRequirements: (List<Requirement>) -> Unit = { Toast.makeText(this, "Unable to start proximity observation. Requirements not fulfilled: ${it.size}", Toast.LENGTH_SHORT).show() }
     private val displayToastAboutError: (Throwable) -> Unit = { Toast.makeText(this, "Error while trying to start proximity observation: ${it.message}", Toast.LENGTH_SHORT).show() }
 
@@ -61,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         // Device must support Bluetooth Low Energy, and so. This is why we created RequirementsWizard.
         // It will check if everything is fine, and if not, it will display adequate dialogs to the user.
         // After all, you will be notified through one of the callbacks.
-        // Let the magic happen!
         RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(
                 this,
                 onRequirementsFulfilled = { startProximityObservation() },
@@ -96,18 +92,18 @@ class MainActivity : AppCompatActivity() {
 
 
         // The first zone is for the venue in general.
-        // All devices in this venue will have the same key,
+        // All devices in this venue will have the same tag,
         // and the actions will be triggered when entering/exiting the venue.
         val venueZone = proximityObserver.zoneBuilder()
-                .forAttachmentKeyAndValue("venue", "office")
-                .inCustomRange(5.0)
+                .forTag("venue")
+                .inFarRange()
                 .withOnEnterAction(makeVenueFilled)
                 .withOnExitAction(makeVenueWhite)
                 .create()
 
         // The next zone is defined for a single desk in your venue - let's call it "Mint desk".
         val mintDeskZone = proximityObserver.zoneBuilder()
-                .forAttachmentKeyAndValue("desk", "mint")
+                .forTag("desk_mint")
                 .inNearRange()
                 .withOnEnterAction(makeMintDeskFilled)
                 .withOnExitAction(makeMintDeskWhite)
@@ -115,13 +111,13 @@ class MainActivity : AppCompatActivity() {
 
         // The last zone is defined for another single desk in your venue - the "Blueberry desk".
         val blueberryDeskZone = proximityObserver.zoneBuilder()
-                .forAttachmentKeyAndValue("desk", "blueberry")
+                .forTag("desk_blueberry")
                 .inNearRange()
                 .withOnEnterAction(makeBlueberryDeskFilled)
                 .withOnExitAction(makeBlueberryDeskWhite)
                 .create()
 
-        // Add zones to ProximityObserver and START observation!
+        // Add zones to ProximityObserver and START the observation!
         proximityObservationHandler = proximityObserver
                 .addProximityZones(venueZone, mintDeskZone, blueberryDeskZone)
                 .start()
