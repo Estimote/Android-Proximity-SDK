@@ -1,5 +1,11 @@
 Changelog
 =====================
+## 0.6.0 (June 18, 2018)
+- Now ProximitySDK uses "tags" for monitoring. 
+- `.forAttachmentKeyAndValue()` is now deprecated. Use `.forTag()`
+- `ProximityAttachment` is now `ProximityContext`, which contains tags, attachments, and useful info for context of entering/exiting given zone. 
+- Fixed [#51](https://github.com/Estimote/Android-Proximity-SDK/issues/51) - a crash when user has revoked Location Permissions.
+
 ## 0.5.1 (May 11, 2018)
 - Added support for large beacon deployments (100+ beacons). 
 
