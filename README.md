@@ -1,13 +1,15 @@
 # Estimote Proximity SDK for Android 
 
-*Estimote Proximity SDK aims to provide a simple way for apps to react to physical context by reading signals from Estimote Beacons.*
+Stick an Estimote Beacon at your desk, in your car, or on a package, and the Estimote Proximity SDK will let your app know when you enter or exit its range. Works indoors, in the background, and is accurate up to a few meters.
 
-*It runs on Estimote Monitoring - Estimote’s algorithm for reliable enter/exit reporting, and offers the following features:*
+**Powered by Estimote Monitoring:** Estimote’s own signal-processing technology, with emphasis on maximum reliability. (up to 3 times better than other beacon-based technologies we’ve [benchmarked against](http://blog.estimote.com/post/165007958785/launching-the-most-reliable-configurationless#better-reliability).
 
-1. **Tag-based identification** - define and monitor zones with simple tags. 
-2. **Multiple zones per beacon** - set up more than one enter/exit zone per a single beacon 
-3. **Software-defined range** - allows you to define enter/exit trigger range. 
-4. **Cloud-based grouping using tags** - add, remove, and replace beacons without having to modify your source code - just modify tags in Estimote Cloud. All changes will be applied automatically. 
+Other Proximity SDK highlights include:
+
+1. **Tag-based identification:** define your proximity zones with human-readable tags instead of abstract identifiers.
+2. **Multiple zones per beacon:** set up more than one enter/exit zone per single beacon. (e.g., a “close” zone and a “far” zone)
+3. **Software-defined range:** define the enter/exit trigger range in code, rather than by the beacon’s broadcasting power.
+4. **Cloud-based tagging & grouping:** add, remove, and replace beacons, without changing the app’s code - just modify the tags in Estimote Cloud.
 
 # Table of Contents
 
@@ -50,7 +52,7 @@ Below there’s a representation of two zones:
 Add the below line to your `build.gradle` file, or use our [Example app](#example-app) to download a ready, pre-integrated demo 
 
 ```Gradle
-implementation 'com.estimote:proximity-sdk:0.5.1'
+implementation 'com.estimote:proximity-sdk:0.6.0'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
