@@ -13,7 +13,7 @@
 
 * [Tag-based identification](#tag-based-identification)
 * [Installation](#installation)
-* [How to use Proximity SDK in your app](#how-to-use-proximity-sdk-in-your-app)
+* [How to use Proximity SDK in your app](#how-to-use-it-in-your-app)
 * [Location permissions](#location-permissions)
 * [Background support](#background-support)
 * [Additional features](#additional-features)
@@ -24,29 +24,45 @@
 
 # Tag-based identification
 
-Details of each of your Estimote devices are available in Estimote Cloud. Your beacons have unique identifiers, but memorising  all of them can be challenging. This is why Estimote Proximity SDK uses tag-based identification.
+# Tag-based identification
 
->As our SDK is still in version `0.x.x`, we're constantly modifying our API according to your feedback. Our latest iteration has evoloved our SDK to be based on simple tags, backed up with attachments as an optional additional information. From the version `0.6.0`, the method `.forAttachmentKeyAndValue(...)` is deprecated - please use `.forTag(...)` instead.
+Estimote Proximity SDK uses tag-based identification to allow for dynamic setup changes.
+You monitor beacons by tags, which you assign in Estimote Cloud. For example, instead of saying "monitor for beacon 123 and beacon 456", you say, "monitor for beacons tagged as `lobby`". This way, if you need to replace or add more beacons to the lobby, you just add/change tags in Estimote Cloud. Your app will pick up the new setup the next time the ProximityObserver is started.
+
+>As our SDK is still in version `0.x.x`, we're constantly modifying our API according to your feedback. Our latest iteration has is based on simple tags, backed up with attachments as an optional additional information. From the version `0.6.0`, the method `.forAttachmentKeyAndValue(...)` is deprecated - please use `.forTag(...)` instead.
+
+Estimote Proximity SDK is built on the top of three key components: _observer_, _zone_, and _zone's context_. 
+
+- _Observer_ - starts and stops monitoring for a provided list of zones 
+- _Zone_ - representation of a physical area combining a group of beacons with the same _tag_.
+- _Zone’s context (Proximity Context)_ - a combination of a single beacon with its _tag_ and _list of attachments_ assigned to it.
+- _Action (callbacks)_ - every _zone_ has three types of callbacks triggered when you: enter a _zone's context_, exit it, or a number of heard _contexts_ changes.
+
+Below there’s a representation of two zones:
+
+- `blueberry` zone with two _Proximity Contexts_,
+- `mint` zone with only one _Proximity Context_.
 
 ![Proximity zones based on tags](/images/tags.png)
 
 # Installation
 
-## Requirements
-
-- One or more [Estimote Proximity or Location Beacon](https://estimote.com/products/) with `Estimote Monitoring` enabled.
-- An Android device with Bluetooth Low Energy support. We suggest using Android 5.0+ (Lollipop or newer). 
-- An account in [Estimote Cloud](https://cloud.estimote.com/#/)
-
 ## Gradle
 
-Add this line to your `build.gradle` file:
+Add the below line to your `build.gradle` file, or use our [Example app](#example-app) to download a ready, pre-integrated demo 
+
 ```Gradle
 implementation 'com.estimote:proximity-sdk:0.5.1'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
-# How to use Proximity SDK in your app
+# How to use it in your app
+
+## Requirements
+
+- One or more [Estimote Proximity Beacons](https://estimote.com/products/) with Estimote Monitoring enabled. Here’s [how to enable it.](https://community.estimote.com/hc/en-us/articles/226144728-How-to-enable-Estimote-Monitoring)
+- An Android device with Bluetooth Low Energy support. We suggest using Android 5.0+ (Lollipop or newer). 
+- An account in [Estimote Cloud](https://cloud.estimote.com/#/)
 
 ## 1. Setting up tags in your Estimote Cloud account
 1. Go to https://cloud.estimote.com/#/
@@ -180,6 +196,8 @@ protected void onDestroy() {
 ```
 ## (Optional) Adding attachments to your beacons
 
+While zone identification is based on tags, **attachments** are a way to add additional content to a beacon and a zone it defines. Think of it as a custom backend where you can assign any additional data to a particular beacon.
+
 1. Go to https://cloud.estimote.com/#/
 2. Click on the beacon you want to configure
 3. Click `Edit settings` button
@@ -270,7 +288,7 @@ Also, bear in mind, that the system callback **may be invoked many times**, thus
 
 # Additional features
 
-## Caching data for offline work 
+## Caching data for limited internet connection use cases
 Since the version `0.5.0` the `ProximityObserver` will persist necessary data locally, so that when there is no internet access, it may still be able to do proximity observation using that data. The only need is to call `proximityObserver.start()` **at least once** when the internet connection is available - it will fetch all the necessary data from the Estimote Cloud, and will store them locally for the later use.  
 
 ## Scanning for Estimote Telemetry
