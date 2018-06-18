@@ -21,9 +21,7 @@
 * [Example app](#example-app)
 * [Your feedback and questions](#your-feedback-and-questions)
 * [Changelog](#changelog)
-
-# Tag-based identification
-
+]
 # Tag-based identification
 
 Estimote Proximity SDK uses tag-based identification to allow for dynamic setup changes.
