@@ -97,7 +97,8 @@ ProximityObserver proximityObserver = new ProximityObserverBuilder(getApplicatio
                 })
                 .build();
 ```
-You can customize your `ProximityObject` using the available options:
+You can customize your `ProximityObserver` using the available options:
+
 - **withLowLatencyPowerMode** - the most reliable mode, but may drain battery a lot. 
 - **withBalancedPowerMode** - balance between scan reliability and battery drainage. 
 - **withLowPowerMode** - battery efficient mode, but not that reliable.
@@ -108,7 +109,7 @@ You can customize your `ProximityObject` using the available options:
 - **withEstimoteSecureMonitoringDisabled** - using this will disable scanning for encrypted Estimote packets. `ProximityObserver` will not try to resolve encrypted packets using Estimote Secure Monitoring protocol. Only unencrypted packets will be observed.
 
 ## 3. Define proximity zones
-Now for the fun part - create your own proximity zones using `proximityObserver.zoneBuilder()`
+Create your own proximity zones using `proximityObserver.zoneBuilder()`
 
 ```Kotlin
 // Kotlin
@@ -150,6 +151,7 @@ ProximityZone venueZone =
         .create();
 ```
 You zones can be defined with the below options: 
+
 - **forTag** - a tag that will trigger this zone actions. 
 - **onEnterAction** - the action that will be triggered when the user enters the zone  
 - **onExitAction** - the action that will be triggered when the user exits the zone.
@@ -157,6 +159,7 @@ You zones can be defined with the below options:
 - **inFarRange** - the far distance at which actions will be invoked. 
 - **inNearRange** - the near distance at which actions will be invoked.
 - **inCustomRange** - custom desired trigger distance in meters. 
+
 > Notice that due to the nature of Bluetooth Low Energy, the range is "desired" and not "exact". We are constantly improving the precision. 
 
 ## 4. Start proximity observation
