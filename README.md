@@ -29,7 +29,7 @@ Other Proximity SDK highlights include:
 Estimote Proximity SDK uses tag-based identification to allow for dynamic setup changes.
 You monitor beacons by tags, which you assign in Estimote Cloud. For example, instead of saying "monitor for beacon 123 and beacon 456", you say, "monitor for beacons tagged as `lobby`". This way, if you need to replace or add more beacons to the lobby, you just add/change tags in Estimote Cloud. Your app will pick up the new setup the next time the ProximityObserver is started.
 
->As our SDK is still in version `0.x.x`, we're constantly modifying our API according to your feedback. Our latest iteration has is based on simple tags, backed up with attachments as an optional additional information. From the version `0.6.0`, the method `.forAttachmentKeyAndValue(...)` is deprecated - please use `.forTag(...)` instead.
+>As our SDK is still in version `0.x.x`, we're constantly modifying our API according to your feedback. Our latest iteration is based on simple tags, backed up with attachments as an optional additional information. From the version `0.6.0`, the method `.forAttachmentKeyAndValue(...)` is deprecated - please use `.forTag(...)` instead.
 
 Estimote Proximity SDK is built on the top of three key components: _observer_, _zone_, and _zone's context_. 
 
