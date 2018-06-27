@@ -3,10 +3,9 @@ package com.estimote.estimotethings
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import com.estimote.cloud_plugin.common.EstimoteCloudCredentials
-import com.estimote.internal_plugins_api.cloud.CloudCredentials
-import com.estimote.internal_plugins_api.cloud.proximity.ProximityAttachment
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory
+import com.estimote.proximity_sdk.proximity.EstimoteCloudCredentials
+import com.estimote.proximity_sdk.proximity.ProximityContext
 import com.estimote.proximity_sdk.proximity.ProximityObserver
 import com.estimote.proximity_sdk.proximity.ProximityObserverBuilder
 
@@ -19,14 +18,12 @@ class ProximityDemoActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_proximity_demo)
         val cloudCredentials = EstimoteCloudCredentials(MainActivity.getAppId(intent), MainActivity.getAppToken(intent))
-        val zoneKey = MainActivity.getZoneKey(intent)
-        val zoneValue = MainActivity.getZoneValue(intent)
+        val zoneKey = MainActivity.getZoneTag(intent)
         RequirementsWizardFactory.createEstimoteRequirementsWizardForAndroidThings().fulfillRequirements(
                 this,
                 onRequirementsFulfilled = {
                     whenBeaconIsCloseThenTriggerAnAction(
                             zoneKey,
-                            zoneValue,
                             cloudCredentials,
                             { Log.d(TAG, "Beacon is now close!") },
                             { Log.d(TAG, "Beacon is now far!") })
@@ -36,17 +33,16 @@ class ProximityDemoActivity : Activity() {
     }
 
     private fun whenBeaconIsCloseThenTriggerAnAction(key: String,
-                                                     value: String,
-                                                     cloudCredentials: CloudCredentials,
-                                                     actionToTriggerWhenBeaconComesClose: (ProximityAttachment) -> Unit,
-                                                     actionToTriggerWhenBeaconGetsOutOfRange: (ProximityAttachment) -> Unit) {
+                                                     cloudCredentials: EstimoteCloudCredentials,
+                                                     actionToTriggerWhenBeaconComesClose: (ProximityContext) -> Unit,
+                                                     actionToTriggerWhenBeaconGetsOutOfRange: (ProximityContext) -> Unit) {
         val proximityObserver = ProximityObserverBuilder(applicationContext, cloudCredentials)
                 .withLowLatencyPowerMode()
                 .withOnErrorAction { Log.d(TAG, "Proximity observation error: ${it.message}") }
                 .withAnalyticsReportingDisabled()
                 .build()
         val beaconZone = proximityObserver.zoneBuilder()
-                .forAttachmentKeyAndValue(key, value)
+                .forTag(key)
                 .inNearRange()
                 .withOnEnterAction(actionToTriggerWhenBeaconComesClose)
                 .withOnExitAction(actionToTriggerWhenBeaconGetsOutOfRange)

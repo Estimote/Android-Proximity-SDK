@@ -30,17 +30,15 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get your app_id and app_token from your Estimote Cloud account ("apps" section).
-        // Also your beacon should have attachment with ZONE_KEY and ZONE_VALUE set in Cloud.
-        // Read more about setting attachments here:
-        // https://github.com/Estimote/Android-Proximity-SDK#attachment-based-identification-explanation
-        startProximityDemo(YOUR_APP_ID, YOUR_APP_TOKEN, ZONE_KEY, ZONE_VALUE)
+        // Also your beacon should have tag ZONE_TAG assigned in Estimote Cloud.
+        startProximityDemo(YOUR_APP_ID, YOUR_APP_TOKEN, ZONE_TAG)
 //        startLightSensorDemo("", "", 20.0)
 //        startMotionDemo("", "")
 //        startTemperatureDemo("", "", 20.0)
     }
 
-    fun startProximityDemo(appId: String, appToken: String, zoneKey: String, zoneValue: String) =
-            startActivity(createProximityIntent(this, ProximityDemoActivity::class.java, appId, appToken, zoneKey, zoneValue))
+    fun startProximityDemo(appId: String, appToken: String, zoneKey: String) =
+            startActivity(createProximityIntent(this, ProximityDemoActivity::class.java, appId, appToken, zoneKey))
 
     fun startLightSensorDemo(gpioPinName: String, beaconId: String, lightLevelThreshold: Double) =
             startActivity(createSensorsIntent(this, LightLevelDemoActivity::class.java, gpioPinName, beaconId, lightLevelThreshold = lightLevelThreshold))
@@ -58,8 +56,7 @@ class MainActivity : Activity() {
         private val TEMPERATURE_THRESHOLD_KEY = "temperature_threshold"
         private val APP_ID_KEY = "app_id"
         private val APP_TOKEN_KEY = "app_token"
-        private val ZONE_KEY_KEY = "zone_key"
-        private val ZONE_VALUE_KEY = "zone_value"
+        private val ZONE_TAG_KEY = "zone_key"
 
         fun <T> createSensorsIntent(context: Context,
                                     activityClass: Class<T>,
@@ -79,13 +76,11 @@ class MainActivity : Activity() {
                                       activityClass: Class<T>,
                                       appId: String,
                                       appToken: String,
-                                      zoneKey: String,
-                                      zoneValue: String): Intent {
+                                      zoneTag: String): Intent {
             val intent = Intent(context, activityClass)
             intent.putExtra(APP_ID_KEY, appId)
             intent.putExtra(APP_TOKEN_KEY, appToken)
-            intent.putExtra(ZONE_KEY_KEY, zoneKey)
-            intent.putExtra(ZONE_VALUE_KEY, zoneValue)
+            intent.putExtra(ZONE_TAG_KEY, zoneTag)
             return intent
         }
 
@@ -95,8 +90,7 @@ class MainActivity : Activity() {
         fun getTemperatureThreshold(intent: Intent) = intent.extras.getDouble(TEMPERATURE_THRESHOLD_KEY)
         fun getAppId(intent: Intent) = intent.extras.getString(APP_ID_KEY)
         fun getAppToken(intent: Intent) = intent.extras.getString(APP_TOKEN_KEY)
-        fun getZoneKey(intent: Intent) = intent.extras.getString(ZONE_KEY_KEY)
-        fun getZoneValue(intent: Intent) = intent.extras.getString(ZONE_VALUE_KEY)
+        fun getZoneTag(intent: Intent) = intent.extras.getString(ZONE_TAG_KEY)
     }
 
 }
