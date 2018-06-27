@@ -310,7 +310,7 @@ Here is how to launch scanning for full telemetry data:
                             Log.d("Full Telemetry", "Got Full Telemetry packet: $it") 
                         }
                         .withOnScanErrorAction { 
-                            Log.e("Full Telemetry", "Full Full Telemetry scan failed: $it") 
+                            Log.e("Full Telemetry", "Full Telemetry scan failed: $it") 
                         }
                         .start()
 ```
@@ -325,6 +325,26 @@ Basic info about possible scanning modes:
 `estimoteTelemetryFrameBScan()` - data from frame B + short device id. Reported on every new frame B.
 
 > Tip: Read more about the Estimote Telemetry protocol specification [here](https://github.com/Estimote/estimote-specs/blob/master/estimote-telemetry.js). You can also check [our tutorial](http://developer.estimote.com/sensors/android-things/) about how to use the telemetry scanning on your Android Things device (RaspberryPi 3.0 for example).  
+
+## Scanning for Estimote Nearable
+*Use case: Getting data from your Estimote stickers.*
+
+``` Kotlin
+// KOTLIN
+val bluetoothScanner = EstimoteBluetoothScannerFactory(applicationContext).getSimpleScanner()
+        nearableScanHandler =
+                bluetoothScanner
+                        .estimoteNearableScan()
+                        .withOnPacketFoundAction {
+                            Log.d("Nearable", "Got nearable packet: $it") 
+                        }
+                        .withOnScanErrorAction { 
+                            Log.e("Nearable", "Nearable scan failed: $it") 
+                        }
+                        .start()
+```
+
+You need to declare `nearableScanHandler` in the outer scope, so that you can use it later to call `nearableScanHandler.stop()` in order to stop scanning.
 
 # Helpful stuff 
 
