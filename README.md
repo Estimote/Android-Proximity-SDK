@@ -29,7 +29,7 @@ Other Proximity SDK highlights include:
 Estimote Proximity SDK uses tag-based identification to allow for dynamic setup changes.
 You monitor beacons by tags, which you assign in Estimote Cloud. For example, instead of saying "monitor for beacon 123 and beacon 456", you say, "monitor for beacons tagged as `lobby`". This way, if you need to replace or add more beacons to the lobby, you just add/change tags in Estimote Cloud. Your app will pick up the new setup the next time the ProximityObserver is started.
 
->As our SDK is still in version `0.x.x`, we're constantly modifying our API according to your feedback. Our latest iteration has is based on simple tags, backed up with attachments as an optional additional information. From the version `0.6.0`, the method `.forAttachmentKeyAndValue(...)` is deprecated - please use `.forTag(...)` instead.
+>As our SDK is still in version `0.x.x`, we're constantly modifying our API according to your feedback. Our latest iteration is based on simple tags, backed up with attachments as an optional additional information. From the version `0.6.0`, the method `.forAttachmentKeyAndValue(...)` is deprecated - please use `.forTag(...)` instead.
 
 Estimote Proximity SDK is built on the top of three key components: _observer_, _zone_, and _zone's context_. 
 
@@ -52,7 +52,7 @@ Below there’s a representation of two zones:
 Add the below line to your `build.gradle` file, or use our [Example app](#example-app) to download a ready, pre-integrated demo 
 
 ```Gradle
-implementation 'com.estimote:proximity-sdk:0.6.0'
+implementation 'com.estimote:proximity-sdk:0.6.1'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
@@ -310,7 +310,7 @@ Here is how to launch scanning for full telemetry data:
                             Log.d("Full Telemetry", "Got Full Telemetry packet: $it") 
                         }
                         .withOnScanErrorAction { 
-                            Log.e("Full Telemetry", "Full Full Telemetry scan failed: $it") 
+                            Log.e("Full Telemetry", "Full Telemetry scan failed: $it") 
                         }
                         .start()
 ```
@@ -325,6 +325,26 @@ Basic info about possible scanning modes:
 `estimoteTelemetryFrameBScan()` - data from frame B + short device id. Reported on every new frame B.
 
 > Tip: Read more about the Estimote Telemetry protocol specification [here](https://github.com/Estimote/estimote-specs/blob/master/estimote-telemetry.js). You can also check [our tutorial](http://developer.estimote.com/sensors/android-things/) about how to use the telemetry scanning on your Android Things device (RaspberryPi 3.0 for example).  
+
+## Scanning for Estimote Nearable
+*Use case: Getting data from your Estimote stickers.*
+
+``` Kotlin
+// KOTLIN
+val bluetoothScanner = EstimoteBluetoothScannerFactory(applicationContext).getSimpleScanner()
+        nearableScanHandler =
+                bluetoothScanner
+                        .estimoteNearableScan()
+                        .withOnPacketFoundAction {
+                            Log.d("Nearable", "Got nearable packet: $it") 
+                        }
+                        .withOnScanErrorAction { 
+                            Log.e("Nearable", "Nearable scan failed: $it") 
+                        }
+                        .start()
+```
+
+You need to declare `nearableScanHandler` in the outer scope, so that you can use it later to call `nearableScanHandler.stop()` in order to stop scanning.
 
 # Helpful stuff 
 

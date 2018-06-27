@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.6.1 (June 25, 2018)
+- OnError action is now properly called on the main thread.
+
 ## 0.6.0 (June 18, 2018)
 - Now ProximitySDK uses "tags" for monitoring. 
 - `.forAttachmentKeyAndValue()` is now deprecated. Use `.forTag()`
