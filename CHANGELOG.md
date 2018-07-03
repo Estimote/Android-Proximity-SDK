@@ -1,5 +1,8 @@
 Changelog
 =====================
+## 0.6.2 (July 3, 2018)
+- Fixed a bug where beacons with no attachments assigned were not triggering enter/exit actions.
+
 ## 0.6.1 (June 25, 2018)
 - OnError action is now properly called on the main thread.
 
