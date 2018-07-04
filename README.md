@@ -415,20 +415,9 @@ If you want to use `ProGuard` with our SDK, make sure to add additional rules to
 -dontwarn retrofit2.Platform$Java8
 -dontwarn kotlin.**
 ```
-# Example app
+# App templates
 
-To get a working prototype, check out the [example app](https://github.com/Estimote/Android-Proximity-SDK/tree/master/example/ProximityApp). It's a single screen app with three labels that change the background color when:
-
-- you are in close proximity to the first desk,
-- in close proximity to the second desk,
-- when you are in the venue in general.
-
-The demo requires at least two Proximity or Location beacons configured for Estimote Monitoring. It's enabled by default in dev kits shipped after mid-September 2017; to enable it on your own check out the [instructions](https://community.estimote.com/hc/en-us/articles/226144728-How-to-enable-Estimote-Monitoring-).
-
-The demo expects beacons having specific tags assigned:
-
-- `venue` and `mint_desk` for the first one,
-- `venue` and `blueberry_desk` for the second one.
+You can download ready-made app templates in Estimote Cloud. Go to your account and click `Apps -> Add new app`.
 
 # Documentation
 Our Kdoc is available [here](https://estimote.github.io/Android-Proximity-SDK/.).
