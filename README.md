@@ -20,7 +20,7 @@ Other Proximity SDK highlights include:
 * [Background support](#background-support)
 * [Additional features](#additional-features)
 * [Helpfull stuff](#helpful-stuff)
-* [Example app](#example-app)
+* [Example apps](#example-apps)
 * [Your feedback and questions](#your-feedback-and-questions)
 * [Changelog](#changelog)
 
@@ -415,9 +415,14 @@ If you want to use `ProGuard` with our SDK, make sure to add additional rules to
 -dontwarn retrofit2.Platform$Java8
 -dontwarn kotlin.**
 ```
-# App templates
+# Example apps
 
-You can download ready-made app templates in Estimote Cloud. Go to your account and click `Apps -> Add new app`.
+To get a working prototype, download a [ready-made app template](https://cloud.estimote.com/#/apps/add) in the Estimote Cloud.
+App ID & App Token credentials are generated automatically.
+
+Use [Proximity](https://cloud.estimote.com/#/apps/add/proximity-content-multiple) to run a simple demo in the foreground.
+Use [Notification](https://cloud.estimote.com/#/apps/add/notification) to run a demo in the background and display notifications.
+Demos require Estimote Beacons [configured with Estimote Monitoring](https://community.estimote.com/hc/en-us/articles/226144728-How-to-enable-Estimote-Monitoring).
 
 # Documentation
 Our Kdoc is available [here](https://estimote.github.io/Android-Proximity-SDK/.).
