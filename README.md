@@ -49,7 +49,7 @@ Below there’s a representation of two zones:
 
 ## Gradle
 
-Add the below line to your `build.gradle` file, or use our [Example app](#example-app) to download a ready, pre-integrated demo 
+Add the below line to your `build.gradle` file, or use our [Example app](#example-apps) to download a ready, pre-integrated demo 
 
 ```Gradle
 implementation 'com.estimote:proximity-sdk:0.6.2'
@@ -420,8 +420,9 @@ If you want to use `ProGuard` with our SDK, make sure to add additional rules to
 To get a working prototype, download a [ready-made app template](https://cloud.estimote.com/#/apps/add) in the Estimote Cloud.
 App ID & App Token credentials are generated automatically.
 
-Use [Proximity](https://cloud.estimote.com/#/apps/add/proximity-content-multiple) to run a simple demo in the foreground.
-Use [Notification](https://cloud.estimote.com/#/apps/add/notification) to run a demo in the background and display notifications.
+- Use [Proximity](https://cloud.estimote.com/#/apps/add/proximity-content-multiple) to run a simple demo in the foreground.
+- Use [Notification](https://cloud.estimote.com/#/apps/add/notification) to run a demo in the background and display notifications.
+
 Demos require Estimote Beacons [configured with Estimote Monitoring](https://community.estimote.com/hc/en-us/articles/226144728-How-to-enable-Estimote-Monitoring).
 
 # Documentation
