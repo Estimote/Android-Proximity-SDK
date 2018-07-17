@@ -52,7 +52,7 @@ Below there’s a representation of two zones:
 Add the below line to your `build.gradle` file, or use our [Example app](#example-apps) to download a ready, pre-integrated demo 
 
 ```Gradle
-implementation 'com.estimote:proximity-sdk:0.6.2'
+implementation 'com.estimote:proximity-sdk:1.0.0'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
@@ -80,7 +80,7 @@ The `ProximityObserver` is the main object for performing proximity observations
 val cloudCredentials = EstimoteCloudCredentials(YOUR_APP_ID_HERE , YOUR_APP_TOKEN_HERE)
 val proximityObserver = ProximityObserverBuilder(applicationContext, cloudCredentials)
                 .withBalancedPowerMode()
-                .withOnErrorAction { /* handle errors here */ }
+                .onError { /* handle errors here */ }
                 .build()
 ```
 
@@ -89,7 +89,7 @@ val proximityObserver = ProximityObserverBuilder(applicationContext, cloudCreden
 EstimoteCloudCredentials cloudCredentials = new EstimoteCloudCredentials(YOUR_APP_ID_HERE, YOUR_APP_TOKEN_HERE);
 ProximityObserver proximityObserver = new ProximityObserverBuilder(getApplicationContext(), cloudCredentials)
                 .withBalancedPowerMode()
-                .withOnErrorAction(new Function1<Throwable, Unit>() {
+                .onError(new Function1<Throwable, Unit>() {
                   @Override
                   public Unit invoke(Throwable throwable) {
                     return null;
@@ -102,7 +102,7 @@ You can customize your `ProximityObserver` using the available options:
 - **withLowLatencyPowerMode** - the most reliable mode, but may drain battery a lot. 
 - **withBalancedPowerMode** - balance between scan reliability and battery drainage. 
 - **withLowPowerMode** - battery efficient mode, but not that reliable.
-- **withOnErrorAction** - action triggered when any error occurs - such as cloud connection problems, scanning, etc.
+- **onError** - action triggered when any error occurs - such as cloud connection problems, scanning, etc.
 - **withScannerInForegroundService** - starts the observation proces with scanner wrapped in [foreground service](https://developer.android.com/guide/components/services.html). This will display notification in user's notifications bar, but will ensure that the scanning won't be killed by the system. **Important:** Your scanning will be handled without the foreground service by default. 
 - **withTelemetryReportingDisabled** - `ProximityObserver` will automatically send telemetry data from your beacons, such as light level, or temperature, to our cloud. This is also an important data for beacon health check (such as tracking battery life for example).
 - **withAnalyticsReportingDisabled** - Analytic data (current visitors in your zones, number of enters, etc) ) is sent to our cloud by default. Use this to turn it off. 
@@ -113,49 +113,49 @@ Create your own proximity zones using `proximityObserver.zoneBuilder()`
 
 ```Kotlin
 // Kotlin
-val venueZone = proximityObserver.zoneBuilder()
+val venueZone = ProximityZoneBuilder()
                 .forTag("venue")
                 .inFarRange()
-                .withOnEnterAction{/* do something here */}
-                .withOnExitAction{/* do something here */}
-                .withOnChangeAction{/* do something here */}
-                .create()
+                .onEnter {/* do something here */}
+                .onExit {/* do something here */}
+                .onContextChange {/* do something here */}
+                .build()
 ```
 
 ```Java
 // Java
 ProximityZone venueZone = 
-    proximityObserver.zoneBuilder()
+    new ProximityZoneBuilder()
         .forTag("venue")
         .inFarRange()
-        .withOnEnterAction(new Function1<ProximityContext, Unit>() {
+        .onEnter(new Function1<ProximityContext, Unit>() {
           @Override public Unit invoke(ProximityContext proximityContext) {
             /* Do something here */
             return null;
           }
         })
-        .withOnExitAction(new Function1<ProximityContext, Unit>() {
+        .onExit(new Function1<ProximityContext, Unit>() {
               @Override
               public Unit invoke(ProximityContext proximityContext) {
                   /* Do something here */
                   return null;
               }
           })
-        .withOnChangeAction(new Function1<List<? extends ProximityContext>, Unit>() {
+        .onContextChange(new Function1<List<? extends ProximityContext>, Unit>() {
           @Override
           public Unit invoke(List<? extends ProximityContext> proximityContexts) {
             /* Do something here */
             return null;
           }
         })
-        .create();
+        .build();
 ```
 You zones can be defined with the below options: 
 
 - **forTag** - a tag that will trigger this zone actions. 
-- **onEnterAction** - the action that will be triggered when the user enters the zone  
-- **onExitAction** - the action that will be triggered when the user exits the zone.
-- **onChangeAction** - triggers when there is a change in proximity of a given tag. If the zone consists of more than one beacon, this will help tracking the ones that are nearby inside the zone, while still remaining one `onEnter` and one `onExit` event for the whole zone in general.  
+- **onEnter** - the action that will be triggered when the user enters the zone  
+- **onExit** - the action that will be triggered when the user exits the zone.
+- **onContextChange** - triggers when there is a change in a proximity context of a given tag. If the zone consists of more than one beacon, this will help tracking the ones that are nearby inside the zone, while still remaining one `onEnter` and one `onExit` event for the whole zone in general.  
 - **inFarRange** - the far distance at which actions will be invoked. 
 - **inNearRange** - the near distance at which actions will be invoked.
 - **inCustomRange** - custom desired trigger distance in meters. 
@@ -167,17 +167,14 @@ When you are done defining your zones, you will need to start the observation pr
 
 ```Kotlin
 // Kotlin
-val observationHandler = proximityObserver
-               .addProximityZone(venueZone)
-               .start()
+val observationHandler = proximityObserver.startObserving(myZone)
 ```
 
 ```Java
 // Java
 ProximityObserver.Handler observationHandler =
        proximityObserver
-           .addProximityZone(venueZone)
-           .start();
+           .startObserving(venueZone);
 ```
 
 The `ProximityObserver` will return `ProximityObserver.Handler` that you can use to stop scanning later. For example:
@@ -209,10 +206,10 @@ While zone identification is based on tags, **attachments** are a way to add add
 When you enter the proximity zone of any beacon with this attachment, you will get a `ProximityContext` as an parameter to your `onEnter` or `onExit` actions. The attachment will be there. Here is an example on how to use it: 
 
 ``` Kotlin 
- val exhibitionZone = proximityObserver.zoneBuilder()
+ val exhibitionZone = ProximityZoneBuilder()
                 .forTag("exhibit")
                 .inNearRange()
-                .withOnEnterAction{ proximityContext ->
+                .onEnter { proximityContext ->
                     val title = proximityContext.getAttachments()["title"]
                     val description = proximityContext.getAttachments()["description"]
                     val imageUrl = proximityContext.getAttachments()["image_url"]
@@ -326,26 +323,6 @@ Basic info about possible scanning modes:
 
 > Tip: Read more about the Estimote Telemetry protocol specification [here](https://github.com/Estimote/estimote-specs/blob/master/estimote-telemetry.js). You can also check [our tutorial](http://developer.estimote.com/sensors/android-things/) about how to use the telemetry scanning on your Android Things device (RaspberryPi 3.0 for example).  
 
-## Scanning for Estimote Nearable
-*Use case: Getting data from your Estimote stickers.*
-
-``` Kotlin
-// KOTLIN
-val bluetoothScanner = EstimoteBluetoothScannerFactory(applicationContext).getSimpleScanner()
-        nearableScanHandler =
-                bluetoothScanner
-                        .estimoteNearableScan()
-                        .withOnPacketFoundAction {
-                            Log.d("Nearable", "Got nearable packet: $it") 
-                        }
-                        .withOnScanErrorAction { 
-                            Log.e("Nearable", "Nearable scan failed: $it") 
-                        }
-                        .start()
-```
-
-You need to declare `nearableScanHandler` in the outer scope, so that you can use it later to call `nearableScanHandler.stop()` in order to stop scanning.
-
 # Helpful stuff 
 
 ## Checking requirements for Bluetooth scanning with RequirementsWizard
@@ -409,7 +386,7 @@ If you want to use `ProGuard` with our SDK, make sure to add additional rules to
 
 ``` 
 -keepattributes Signature, InternalClasses, Exceptions
--keep class com.estimote.proximity_sdk.proximity.cloud.model.**
+-keep class com.estimote.proximity_sdk.internals.proximity.cloud.model.**
 -dontwarn okio.**
 -dontwarn javax.annotation.**
 -dontwarn retrofit2.Platform$Java8
