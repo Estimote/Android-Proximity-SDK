@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityTriggerBuilder - proximity-sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.proximity_sdk.api</a>&nbsp;/&nbsp;<a href="./index.html">ProximityTriggerBuilder</a><br/>
+<br/>
+<h1>ProximityTriggerBuilder</h1>
+<code><span class="keyword">class </span><span class="identifier">ProximityTriggerBuilder</span></code>
+<p>Builds object that handles the deep background system scanning that will invoke given actions.
+Works only on phones with Android 8.0 or greater.</p>
+<p>The purpose of the <a href="../-proximity-trigger/index.html">ProximityTrigger</a> is to allow you to do low-power background scan
+which can trigger your notification/pending intent when entering the range of beacons.</p>
+<p><strong>Author</strong><br/>
+Estimote Inc. (contact@estimote.com)</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-notification-proximity-trigger-builder/index.html">NotificationProximityTriggerBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NotificationProximityTriggerBuilder</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ProximityTriggerBuilder</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder$<init>(android.content.Context)/applicationContext">applicationContext</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">)</span></code>
+<p>Builds object that handles the deep background system scanning that will invoke given actions.
+Works only on phones with Android 8.0 or greater.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="display-notification-when-in-proximity.html">displayNotificationWhenInProximity</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">displayNotificationWhenInProximity</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder$displayNotificationWhenInProximity(android.app.Notification)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Notification.html"><span class="identifier">Notification</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-notification-proximity-trigger-builder/index.html"><span class="identifier">NotificationProximityTriggerBuilder</span></a></code>
+<p>Triggers given notification when the device enters the range of Estimote Beacons.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="trigger-pending-intent-when-in-proximity.html">triggerPendingIntentWhenInProximity</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">triggerPendingIntentWhenInProximity</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder$triggerPendingIntentWhenInProximity(android.app.PendingIntent)/pendingIntent">pendingIntent</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/PendingIntent.html"><span class="identifier">PendingIntent</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-proximity-trigger/index.html"><span class="identifier">ProximityTrigger</span></a></code>
+<p>Triggers given pending intent when the device enters the range of Estimote Beacons.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

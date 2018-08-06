@@ -10,27 +10,32 @@
 <tbody>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.proximity/-estimote-cloud-credentials/index.html">com.estimote.proximity_sdk.proximity.EstimoteCloudCredentials</a></td>
+<a href="../com.estimote.proximity_sdk.api/-estimote-cloud-credentials/index.html">com.estimote.proximity_sdk.api.EstimoteCloudCredentials</a></td>
 <td>
 <p>Basic class that keeps your AppId and AppToken needed for communicating with Estimote Cloud.</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.exception/-estimote-proximity-exception/index.html">com.estimote.proximity_sdk.exception.EstimoteProximityException</a></td>
+<a href="../com.estimote.proximity_sdk.internals.exception/-estimote-proximity-exception.html">com.estimote.proximity_sdk.internals.exception.EstimoteProximityException</a></td>
 <td>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.proximity/-proximity-attachment/index.html">com.estimote.proximity_sdk.proximity.ProximityAttachment</a></td>
+<a href="../com.estimote.proximity_sdk.api/-estimote-proximity-zone/index.html">com.estimote.proximity_sdk.api.EstimoteProximityZone</a></td>
 <td>
-<p>Data attached to the one beacon. You will get this in your defined actions when user enters/exits your zone.</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.proximity/-proximity-observer/index.html">com.estimote.proximity_sdk.proximity.ProximityObserver</a></td>
+<a href="../com.estimote.proximity_sdk.internals.exception/-no-context-for-given-zones-exception/index.html">com.estimote.proximity_sdk.internals.exception.NoContextForGivenZonesException</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-observer/index.html">com.estimote.proximity_sdk.api.ProximityObserver</a></td>
 <td>
 <p>The basic object for proximity observation. It lets you define the zones in which your actions
 will be called, when defined preconditions were met.</p>
@@ -38,21 +43,27 @@ will be called, when defined preconditions were met.</p>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.proximity/-proximity-observer-builder/index.html">com.estimote.proximity_sdk.proximity.ProximityObserverBuilder</a></td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-observer-builder/index.html">com.estimote.proximity_sdk.api.ProximityObserverBuilder</a></td>
 <td>
-<p>Builder for configuring new <a href="../com.estimote.proximity_sdk.proximity/-proximity-observer/index.html">ProximityObserver</a> objects.</p>
+<p>Builder for configuring new <a href="../com.estimote.proximity_sdk.api/-proximity-observer/index.html">ProximityObserver</a> objects.</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.trigger/-proximity-trigger/index.html">com.estimote.proximity_sdk.trigger.ProximityTrigger</a></td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-observer-configuration/index.html">com.estimote.proximity_sdk.api.ProximityObserverConfiguration</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-trigger/index.html">com.estimote.proximity_sdk.api.ProximityTrigger</a></td>
 <td>
 <p>Interface for starting and stopping Proximity Trigger</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.trigger/-proximity-trigger-builder/index.html">com.estimote.proximity_sdk.trigger.ProximityTriggerBuilder</a></td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-trigger-builder/index.html">com.estimote.proximity_sdk.api.ProximityTriggerBuilder</a></td>
 <td>
 <p>Builds object that handles the deep background system scanning that will invoke given actions.
 Works only on phones with Android 8.0 or greater.</p>
@@ -60,20 +71,46 @@ Works only on phones with Android 8.0 or greater.</p>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.proximity/-proximity-zone/index.html">com.estimote.proximity_sdk.proximity.ProximityZone</a></td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-zone/index.html">com.estimote.proximity_sdk.api.ProximityZone</a></td>
 <td>
-<p>The data object that contains configuration defined with <a href="../com.estimote.proximity_sdk.proximity/-proximity-observer/-proximity-zone-builder/index.html">ProximityObserver.ProximityZoneBuilder</a>.</p>
+<p>The data object that contains configuration defined with <a href="#">ProximityObserver.ProximityZoneBuilder</a>.</p>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.trigger/-trigger-broadcast-receiver/index.html">com.estimote.proximity_sdk.trigger.TriggerBroadcastReceiver</a></td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-zone-builder/index.html">com.estimote.proximity_sdk.api.ProximityZoneBuilder</a></td>
+<td>
+<p>Lets you build your <a href="../com.estimote.proximity_sdk.api/-proximity-zone/index.html">ProximityZone</a> objects in a fluent builder manner.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.estimote.proximity_sdk.api/-proximity-zone-context/index.html">com.estimote.proximity_sdk.api.ProximityZoneContext</a></td>
+<td>
+<p>Data attached to the one beacon. You will get this in your defined actions when user enters/exits your zone.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.estimote.proximity_sdk.api/-scan-power-mode/index.html">com.estimote.proximity_sdk.api.ScanPowerMode</a></td>
 <td>
 </td>
 </tr>
 <tr>
 <td>
-<a href="../com.estimote.proximity_sdk.exception/-unable-to-detect-monitoring-state-exception/index.html">com.estimote.proximity_sdk.exception.UnableToDetectMonitoringStateException</a></td>
+<a href="../com.estimote.proximity_sdk.api/-trigger-broadcast-receiver/index.html">com.estimote.proximity_sdk.api.TriggerBroadcastReceiver</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.estimote.proximity_sdk.internals.exception/-unable-to-detect-monitoring-state-exception/index.html">com.estimote.proximity_sdk.internals.exception.UnableToDetectMonitoringStateException</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../com.estimote.proximity_sdk.internals.exception/-wrong-frame-type-exception/index.html">com.estimote.proximity_sdk.internals.exception.WrongFrameTypeException</a></td>
 <td>
 </td>
 </tr>

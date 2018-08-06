@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityTriggerBuilder.NotificationProximityTriggerBuilder - proximity-sdk</title>
+<link rel="stylesheet" href="../../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../../index.html">com.estimote.proximity_sdk.api</a>&nbsp;/&nbsp;<a href="../index.html">ProximityTriggerBuilder</a>&nbsp;/&nbsp;<a href="./index.html">NotificationProximityTriggerBuilder</a><br/>
+<br/>
+<h1>NotificationProximityTriggerBuilder</h1>
+<code><span class="keyword">class </span><span class="identifier">NotificationProximityTriggerBuilder</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">NotificationProximityTriggerBuilder</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder.NotificationProximityTriggerBuilder$<init>(android.content.Context, android.app.Notification)/applicationContext">applicationContext</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder.NotificationProximityTriggerBuilder$<init>(android.content.Context, android.app.Notification)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Notification.html"><span class="identifier">Notification</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="build.html">build</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">build</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../-proximity-trigger/index.html"><span class="identifier">ProximityTrigger</span></a></code>
+<p>Builds the configured <a href="../../-proximity-trigger/index.html">ProximityTrigger</a> object.
+Bear in mind that this is only supported since Android 8.0.
+If run on the lower version of Android, it will simply trigger nothing.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="trigger-only-once.html">triggerOnlyOnce</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">triggerOnlyOnce</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">NotificationProximityTriggerBuilder</span></a></code>
+<p>Triggers the event only at first time when a device enters the given proximity.
+By default it triggers every time.
+It is recommended to stop this trigger later on.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-notification-id.html">withNotificationId</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withNotificationId</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder.NotificationProximityTriggerBuilder$withNotificationId(kotlin.Int)/notificationId">notificationId</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">NotificationProximityTriggerBuilder</span></a></code>
+<p>Builds with notification of specified id</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-notification-tag.html">withNotificationTag</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withNotificationTag</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder.NotificationProximityTriggerBuilder$withNotificationTag(kotlin.String)/notificationTag">notificationTag</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">NotificationProximityTriggerBuilder</span></a></code>
+<p>Builds with notification of specified tag</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

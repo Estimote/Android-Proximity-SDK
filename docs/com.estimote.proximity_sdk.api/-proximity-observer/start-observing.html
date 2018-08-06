@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityObserver.startObserving - proximity-sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.proximity_sdk.api</a>&nbsp;/&nbsp;<a href="index.html">ProximityObserver</a>&nbsp;/&nbsp;<a href="./start-observing.html">startObserving</a><br/>
+<br/>
+<h1>startObserving</h1>
+<a name="com.estimote.proximity_sdk.api.ProximityObserver$startObserving(kotlin.Array((com.estimote.proximity_sdk.api.ProximityZone)))"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">startObserving</span><span class="symbol">(</span><span class="keyword">vararg</span> <span class="identifier" id="com.estimote.proximity_sdk.api.ProximityObserver$startObserving(kotlin.Array((com.estimote.proximity_sdk.api.ProximityZone)))/proximityZones">proximityZones</span><span class="symbol">:</span>&nbsp;<a href="../-proximity-zone/index.html"><span class="identifier">ProximityZone</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-handler/index.html"><span class="identifier">Handler</span></a></code>
+<p>Starts the actual BLE scanning. The scan will be performed according to the construction
+parameters of <a href="index.html">ProximityObserver</a> set by using <a href="../-proximity-observer-builder/index.html">ProximityObserverBuilder</a>.
+Notice, that depending on configuration, the <a href="./start-observing.html">ProximityObserver.startObserving</a> method may
+invoke some additional network calls.</p>
+<h3>Parameters</h3>
+<p><a name="proximityZones"></a>
+<code>proximityZones</code> - zones to observe for.</p>
+<p><strong>Return</strong><br/>
+a <a href="-handler/index.html">Handler</a> object that you should use to stop the scanning later on.</p>
+<a name="com.estimote.proximity_sdk.api.ProximityObserver$startObserving(kotlin.collections.List((com.estimote.proximity_sdk.api.ProximityZone)))"></a>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">startObserving</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityObserver$startObserving(kotlin.collections.List((com.estimote.proximity_sdk.api.ProximityZone)))/proximityZones">proximityZones</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="../-proximity-zone/index.html"><span class="identifier">ProximityZone</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="-handler/index.html"><span class="identifier">Handler</span></a></code>
+<p>Starts the actual BLE scanning. The scan will be performed according to the construction
+parameters of <a href="index.html">ProximityObserver</a> set by using <a href="../-proximity-observer-builder/index.html">ProximityObserverBuilder</a>.
+Notice, that depending on configuration, the <a href="./start-observing.html">ProximityObserver.startObserving</a> method may
+invoke some additional network calls.</p>
+<p><strong>Return</strong><br/>
+a <a href="-handler/index.html">Handler</a> object that you should use to stop the scanning later on.</p>
+</BODY>
+</HTML>

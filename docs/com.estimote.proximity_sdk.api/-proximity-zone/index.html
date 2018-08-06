@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityZone - proximity-sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.proximity_sdk.api</a>&nbsp;/&nbsp;<a href="./index.html">ProximityZone</a><br/>
+<br/>
+<h1>ProximityZone</h1>
+<code><span class="keyword">interface </span><span class="identifier">ProximityZone</span></code>
+<p>The data object that contains configuration defined with <a href="#">ProximityObserver.ProximityZoneBuilder</a>.</p>
+<p><strong>Author</strong><br/>
+Estimote Inc. (contact@estimote.com)</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="desired-mean-trigger-distance.html">desiredMeanTriggerDistance</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">desiredMeanTriggerDistance</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-context-change-action.html">onContextChangeAction</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">onContextChangeAction</span><span class="symbol">: </span><span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="../-proximity-zone-context/index.html"><span class="identifier">ProximityZoneContext</span></a><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-enter-action.html">onEnterAction</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">onEnterAction</span><span class="symbol">: </span><span class="symbol">(</span><a href="../-proximity-zone-context/index.html"><span class="identifier">ProximityZoneContext</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-exit-action.html">onExitAction</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">onExitAction</span><span class="symbol">: </span><span class="symbol">(</span><a href="../-proximity-zone-context/index.html"><span class="identifier">ProximityZoneContext</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="tag.html">tag</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">tag</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-estimote-proximity-zone/index.html">EstimoteProximityZone</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">EstimoteProximityZone</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ProximityZone</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

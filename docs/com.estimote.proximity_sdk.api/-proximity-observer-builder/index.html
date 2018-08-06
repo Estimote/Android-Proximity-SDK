@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityObserverBuilder - proximity-sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.proximity_sdk.api</a>&nbsp;/&nbsp;<a href="./index.html">ProximityObserverBuilder</a><br/>
+<br/>
+<h1>ProximityObserverBuilder</h1>
+<code><span class="keyword">class </span><span class="identifier">ProximityObserverBuilder</span></code>
+<p>Builder for configuring new <a href="../-proximity-observer/index.html">ProximityObserver</a> objects.</p>
+<h3>Parameters</h3>
+<p><a name="applicationContext"></a>
+<code>applicationContext</code> - the context of your app.</p>
+<p><a name="cloudCredentials"></a>
+<code>cloudCredentials</code> - <a href="../-estimote-cloud-credentials/index.html">EstimoteCloudCredentials</a> object for authorizing within Estimote Cloud.</p>
+<p><strong>Author</strong><br/>
+Estimote Inc. (contact@estimote.com)</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">ProximityObserverBuilder</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityObserverBuilder$<init>(android.content.Context, com.estimote.proximity_sdk.api.EstimoteCloudCredentials)/applicationContext">applicationContext</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Context.html"><span class="identifier">Context</span></a><span class="symbol">, </span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityObserverBuilder$<init>(android.content.Context, com.estimote.proximity_sdk.api.EstimoteCloudCredentials)/cloudCredentials">cloudCredentials</span><span class="symbol">:</span>&nbsp;<a href="../-estimote-cloud-credentials/index.html"><span class="identifier">EstimoteCloudCredentials</span></a><span class="symbol">)</span></code>
+<p>Builder for configuring new <a href="../-proximity-observer/index.html">ProximityObserver</a> objects.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="build.html">build</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">build</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-proximity-observer/index.html"><span class="identifier">ProximityObserver</span></a></code>
+<p>Builds the configured <a href="../-proximity-observer/index.html">ProximityObserver</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="on-error.html">onError</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onError</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityObserverBuilder$onError(kotlin.Function1((kotlin.Throwable, kotlin.Unit)))/onErrorAction">onErrorAction</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/index.html"><span class="identifier">Throwable</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Specifies an action to be called whenever any error occurs.
+If not specified, all errors will be delivered through Log.e(...) by default.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-analytics-reporting-disabled.html">withAnalyticsReportingDisabled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withAnalyticsReportingDisabled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Disables Estimote Analytics for this <code>ProximityObserver</code>.
+It provides analytics info about visits in your zones.
+<em>Enabled</em> by default.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-balanced-power-mode.html">withBalancedPowerMode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withBalancedPowerMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Proximity observer will use mode with balance between scan reliability and battery drainage.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-estimote-secure-monitoring-disabled.html">withEstimoteSecureMonitoringDisabled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withEstimoteSecureMonitoringDisabled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Disables Estimote Secure Monitoring resolving. When enabled, it will try to decrypt scanned
+encrypted packets in addition to non-secure packets.
+When disabled, it will only scan for non-encrypted packets.
+<em>Enabled</em> by default.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-low-latency-power-mode.html">withLowLatencyPowerMode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withLowLatencyPowerMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Proximity observer will use the most reliable mode, but may drain battery a lot.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-low-power-mode.html">withLowPowerMode</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withLowPowerMode</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Proximity observer will use battery efficient mode, but the scanning won't be super reliable.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-scanner-in-foreground-service.html">withScannerInForegroundService</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withScannerInForegroundService</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityObserverBuilder$withScannerInForegroundService(android.app.Notification)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Notification.html"><span class="identifier">Notification</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Will make the observation process use scanner wrapped in a foreground service.
+This will display notification in the user's notifications bar,
+but will ensure that the scanning won't be killed by the system.
+Your scanning will be handled <em>without any service</em> by default.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="with-telemetry-reporting-disabled.html">withTelemetryReportingDisabled</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">withTelemetryReportingDisabled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">ProximityObserverBuilder</span></a></code>
+<p>Disables periodical beacons' telemetry data reporting to Estimote cloud.
+It sends info such as battery level, temperature, or light level.
+<em>Enabled</em> by default.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

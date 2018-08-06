@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.estimote.proximity_sdk.api - proximity-sdk</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="./index.html">com.estimote.proximity_sdk.api</a><br/>
+<br/>
+<h2>Package com.estimote.proximity_sdk.api</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-estimote-cloud-credentials/index.html">EstimoteCloudCredentials</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">EstimoteCloudCredentials</span></code>
+<p>Basic class that keeps your AppId and AppToken needed for communicating with Estimote Cloud.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-estimote-proximity-zone/index.html">EstimoteProximityZone</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">EstimoteProximityZone</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-proximity-zone/index.html"><span class="identifier">ProximityZone</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-observer/index.html">ProximityObserver</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ProximityObserver</span></code>
+<p>The basic object for proximity observation. It lets you define the zones in which your actions
+will be called, when defined preconditions were met.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-observer-builder/index.html">ProximityObserverBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ProximityObserverBuilder</span></code>
+<p>Builder for configuring new <a href="-proximity-observer/index.html">ProximityObserver</a> objects.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-observer-configuration/index.html">ProximityObserverConfiguration</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">ProximityObserverConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-trigger/index.html">ProximityTrigger</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ProximityTrigger</span></code>
+<p>Interface for starting and stopping Proximity Trigger</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-trigger-builder/index.html">ProximityTriggerBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ProximityTriggerBuilder</span></code>
+<p>Builds object that handles the deep background system scanning that will invoke given actions.
+Works only on phones with Android 8.0 or greater.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-zone/index.html">ProximityZone</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ProximityZone</span></code>
+<p>The data object that contains configuration defined with <a href="#">ProximityObserver.ProximityZoneBuilder</a>.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-zone-builder/index.html">ProximityZoneBuilder</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ProximityZoneBuilder</span></code>
+<p>Lets you build your <a href="-proximity-zone/index.html">ProximityZone</a> objects in a fluent builder manner.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-proximity-zone-context/index.html">ProximityZoneContext</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ProximityZoneContext</span></code>
+<p>Data attached to the one beacon. You will get this in your defined actions when user enters/exits your zone.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-scan-power-mode/index.html">ScanPowerMode</a></p>
+</td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">ScanPowerMode</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-trigger-broadcast-receiver/index.html">TriggerBroadcastReceiver</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TriggerBroadcastReceiver</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html"><span class="identifier">BroadcastReceiver</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityTrigger - proximity-sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.proximity_sdk.api</a>&nbsp;/&nbsp;<a href="./index.html">ProximityTrigger</a><br/>
+<br/>
+<h1>ProximityTrigger</h1>
+<code><span class="keyword">interface </span><span class="identifier">ProximityTrigger</span></code>
+<p>Interface for starting and stopping Proximity Trigger</p>
+<p><strong>Author</strong><br/>
+Estimote Inc. (contact@estimote.com)</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-handler/index.html">Handler</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Handler</span></code>
+<p>Handler object that will allow you to stop the ProximityTrigger after starting it.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="start.html">start</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">start</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-handler/index.html"><span class="identifier">Handler</span></a></code>
+<p>Starts the previously configured trigger. This will register a deep system callback,
+that will be notified when the given BLE preconditions are met (entering beacons range for example).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

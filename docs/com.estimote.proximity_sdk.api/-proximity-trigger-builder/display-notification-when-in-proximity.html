@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ProximityTriggerBuilder.displayNotificationWhenInProximity - proximity-sdk</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">proximity-sdk</a>&nbsp;/&nbsp;<a href="../index.html">com.estimote.proximity_sdk.api</a>&nbsp;/&nbsp;<a href="index.html">ProximityTriggerBuilder</a>&nbsp;/&nbsp;<a href="./display-notification-when-in-proximity.html">displayNotificationWhenInProximity</a><br/>
+<br/>
+<h1>displayNotificationWhenInProximity</h1>
+<a name="com.estimote.proximity_sdk.api.ProximityTriggerBuilder$displayNotificationWhenInProximity(android.app.Notification)"></a>
+<code><span class="keyword">fun </span><span class="identifier">displayNotificationWhenInProximity</span><span class="symbol">(</span><span class="identifier" id="com.estimote.proximity_sdk.api.ProximityTriggerBuilder$displayNotificationWhenInProximity(android.app.Notification)/notification">notification</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Notification.html"><span class="identifier">Notification</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-notification-proximity-trigger-builder/index.html"><span class="identifier">NotificationProximityTriggerBuilder</span></a></code>
+<p>Triggers given notification when the device enters the range of Estimote Beacons.</p>
+<p><strong>Important:</strong> This notification may be displayed several times while the user
+is being inside the beacons' range. It means, that if the user dismiss the notification,
+it may reappear again. We strongly suggest not to annoy your users, which may result in bad
+UX. In order to be user-friendly, you should implement custom logic to handle notification dismissing,
+where you would stop this trigger from displaying the notification (see <a href="../-proximity-trigger/index.html">ProximityTrigger</a> stop() methods. ]</p>
+<p>If you want your notification to be displayed only on first time, consider using <a href="-notification-proximity-trigger-builder/trigger-only-once.html">NotificationProximityTriggerBuilder.triggerOnlyOnce</a>.</p>
+<h3>Parameters</h3>
+<p><a name="notification"></a>
+<code>notification</code> - Notification object to display in the user's notification bar.
+You need to make sure this object is built properly. You can read more about how to do it here:
+https://developer.android.com/training/notify-user/build-notification.html</p>
+<p><strong>Return</strong><br/>
+<a href="index.html">ProximityTriggerBuilder</a> builder object for further configuration.</p>
+</BODY>
+</HTML>
