@@ -1,5 +1,16 @@
 Changelog
 =====================
+## 1.0.0 (July 24, 2018)
+- Changed API of ProximityObserver. Now observatuion starts using method `startObserving(zones...)`
+- Zones are now created using dedicated builder `ProximityZoneBuilder`.
+- `onErrorAction` is now `onError`
+- `onEnterAction` is now `onEnter`
+- `onExitAction` is now `onExit`
+- `onChangeAction` is now `onContextChange`
+- `ProximityAttachment` is now `ProximityZoneContext` whioch contains all the necesarry info about beacon attachment, id, and tags.
+- Changed packaging, so it may be needed to update your imports.
+- Fixed a bug, where setting custom `onError` threw an exception when used from Java code. 
+
 ## 0.6.2 (July 3, 2018)
 - Fixed a bug where beacons with no attachments assigned were not triggering enter/exit actions.
 
