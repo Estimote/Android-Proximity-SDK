@@ -1,5 +1,10 @@
 Changelog
 =====================
+## 1.0.1 (August 8, 2018)
+- Updated compatibility with IndoorSDK
+- Updated targetVersion to API 26 
+- Removed duplicated onError being called when an BLE error ocurrs.
+
 ## 1.0.0 (July 24, 2018)
 - Changed API of ProximityObserver. Now observatuion starts using method `startObserving(zones...)`
 - Zones are now created using dedicated builder `ProximityZoneBuilder`.
