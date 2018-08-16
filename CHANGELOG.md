@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 1.0.2 (August 16, 2018)
+- Added support for Android Pie (API 28)
+- Improved error handling when scanning for Estimote Secure Packets (Enabled by default unless you build your `ProximityObserver` with `.withEstimoteSecureMonitoringDisabled()`.
+
 ## 1.0.1 (August 8, 2018)
 - Updated compatibility with IndoorSDK
 - Updated targetVersion to API 26 
