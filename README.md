@@ -52,7 +52,7 @@ Below there’s a representation of two zones:
 Add the below line to your `build.gradle` file, or use our [Example app](#example-apps) to download a ready, pre-integrated demo 
 
 ```Gradle
-implementation 'com.estimote:proximity-sdk:1.0.1'
+implementation 'com.estimote:proximity-sdk:1.0.2'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
