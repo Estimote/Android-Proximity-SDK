@@ -252,7 +252,7 @@ val notification = Notification.Builder(this)
 
 > Tip: You can control the lifecycle of scanning by starting/stopping it in the different places of your app. If you happen to  never stop it, the underlying `foreground service` will keep running, and the notification will be still visible to the user. If you want such behaviour, remember to initialize the `notification` object correctly - add button to it that stops the service. Please, read more in the [official android documentation](https://developer.android.com/training/notify-user/build-notification.html) about managing notification objects. 
 
-## Background scanning using Proximity Trigger (Android 8.0+)
+## Experimental: background scanning using Proximity Trigger (Android 8.0+) 
 *Use case: Displaying your notification when user enters the zone while having your app KILLED - the notification allows him to open your app (if you create it in such way). Triggering your `PendingIntent` when user enters the zone.*
 
 Since Android version 8.0 there is a possibility to display a notification to the user when he enters the specified zone. This may allow him to open your app (by clicking the notification for example) that will start the proper foreground scanning.  
@@ -285,6 +285,8 @@ This will register the notification to be invoked when the user enters the zone 
 Also, bear in mind, that the system callback **may be invoked many times**, thus displaying your notification again and again. In order to avoid this problem, you should add a button to your notification that will call `trigger.stop()` to stop the system scan. On the other hand, you can use `displayOnlyOnce()` method when building the `ProximityTrigger` object - this will fire your notification only once, and then you will need to call `start()` again.
 
 > Known problems: The scan registraton gets cancelled when user disables bluetooth and WiFi on his phone. After that, the trigger may not work, and your app will need to be opened once again to reschedule the `ProximityTrigger`.
+
+> **This feature is still experimental and in development.** 
 
 # Additional features
 
