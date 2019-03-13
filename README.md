@@ -19,7 +19,7 @@ Other Proximity SDK highlights include:
 * [Location permissions](#location-permissions)
 * [Background support](#background-support)
 * [Additional features](#additional-features)
-* [Helpfull stuff](#helpful-stuff)
+* [Helpful stuff](#helpful-stuff)
 * [Example apps](#example-apps)
 * [Your feedback and questions](#your-feedback-and-questions)
 * [Changelog](#changelog)
