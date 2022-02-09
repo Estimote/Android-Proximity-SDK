@@ -49,12 +49,28 @@ Below there’s a representation of two zones:
 
 ## Gradle
 
-Add the below line to your `build.gradle` file, or use our [Example app](#example-apps) to download a ready, pre-integrated demo 
+Starting with version 1.0.6, Estimote Proximity SDK is available in our JFrog Artifactory. In order to gain access to it, our Artifactory repository must be added to the list of Maven repositories in your top level build.gradle file: 
 
 ```Gradle
-implementation 'com.estimote:proximity-sdk:1.0.5'
+allprojects {
+    repositories {
+        maven {
+            url "https://estimote.jfrog.io/artifactory/android-proximity-sdk"
+        }
+        ...
+    }
+    ...
+}
+```
+
+Add the below line to your `build.gradle` file
+
+```Gradle
+implementation 'com.estimote:proximity-sdk:1.0.6'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
+
+Or use our [Example app](#example-apps) to download a ready, pre-integrated demo
 
 # How to use it in your app
 
