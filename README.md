@@ -49,7 +49,7 @@ Below there’s a representation of two zones:
 
 ## Gradle
 
-As Jfrog changed JCenter to a read-only repository on March 31st, 2021, since 1.0.6 versions are available in our Artifactory repository. In order to gain access to it, our Artifactory repository must be added to the list of Maven repositories in your top level build.gradle file: 
+Starting with version 1.0.6, Estimote Proximity SDK is available in our JFrog Artifactory. In order to gain access to it, our Artifactory repository must be added to the list of Maven repositories in your top level build.gradle file: 
 
 ```Gradle
 allprojects {
