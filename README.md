@@ -66,7 +66,7 @@ allprojects {
 Add the below line to your `build.gradle` file
 
 ```Gradle
-implementation 'com.estimote:proximity-sdk:1.0.6'
+implementation 'com.estimote:proximity-sdk:1.0.7'
 ```
 > If you are using Gradle version below `3.0.0` then you should use `compile` instead of `implementation`.
 
