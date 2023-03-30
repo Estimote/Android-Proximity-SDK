@@ -238,7 +238,10 @@ When you enter the proximity zone of any beacon with this attachment, you will g
 # Location permissions
 
 In order for ProximitySDK to work, you need to grant your app a location permission. You can ask your user for the permission by yourself, or use our [RequirementsWizard](#checking-requirements-for-bluetooth-scanning-with-requirementswizard) to do it for you. 
-
+> IMPORTANT: Since version 1.0.8 targeting Android SDK 31+ requires new permissions, that are not (yet) checked by RequirementsWizard. Please make sure your app has granted access to following permissions: 
+> * android.permission.BLUETOOTH_CONNECT, 
+> * android.permission.BLUETOOTH_SCAN,
+> * android.permission.ACCESS_FINE_LOCATION
 
 # Background support
 
@@ -292,6 +295,8 @@ val notification = Notification.Builder(this)
 ``` Kotlin 
 // KOTLIN
 val triggerHandle = ProximityTriggerBuilder(applicationContext)
+                // you can handle potential scanning error here. By default it is logging error message.
+                .onError { ... }
                 .displayNotificationWhenInProximity(notification)
                 .build()
                 .start()
@@ -300,7 +305,7 @@ This will register the notification to be invoked when the user enters the zone 
 
 Also, bear in mind, that the system callback **may be invoked many times**, thus displaying your notification again and again. In order to avoid this problem, you should add a button to your notification that will call `trigger.stop()` to stop the system scan. On the other hand, you can use `displayOnlyOnce()` method when building the `ProximityTrigger` object - this will fire your notification only once, and then you will need to call `start()` again.
 
-> Known problems: The scan registraton gets cancelled when user disables bluetooth and WiFi on his phone. After that, the trigger may not work, and your app will need to be opened once again to reschedule the `ProximityTrigger`.
+> Known problems: The scan registration gets cancelled when user disables bluetooth and WiFi on his phone. After that, the trigger may not work, and your app will need to be opened once again to reschedule the `ProximityTrigger`.
 
 > **This feature is still experimental and in development.** 
 
@@ -344,6 +349,12 @@ Basic info about possible scanning modes:
 # Helpful stuff 
 
 ## Checking requirements for Bluetooth scanning with RequirementsWizard
+> IMPORTANT: Since version 1.0.8 targeting Android SDK 31+ requires new permissions, that are not (yet) checked by RequirementsWizard. Please make sure your app has granted access to following permissions:
+> * android.permission.BLUETOOTH_CONNECT,
+> * android.permission.BLUETOOTH_SCAN,
+> * android.permission.ACCESS_FINE_LOCATION
+
+
 *Use case: Making sure that everything needed for Bluetooth scanning to work is set up - the user has Bluetooth enabled, location permissions were granted, etc. Displaying default popup dialogs to enable Bluetooth and give needed permissions.*
 
 The `ProximityObserver` won't work without the certain requirements fulfilled. Bluetooth needs to be enabled on a phone, Location permissions need to be granted, etc. You can do this either manually, by checking this before starting the `ProximityObserver`, or use our support library named **Mustard**, which contains handy Kotlin recipes for Android's UI-related stuff. 
