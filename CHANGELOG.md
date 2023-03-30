@@ -1,5 +1,9 @@
 Changelog
 =====================
+## 1.0.8 (March 30, 2023)
+- Added support for Android SDK 31+ (including fixes for android:exported, PendingIntent flags, new necessary AndroidManifest permissions)
+- Added new `onError` callback to `ProximityTriggerBuilder` to prevent app crashes e.g. while trying to scan without permissions.
+
 ## 1.0.3 (August 28, 2018)
 - Added support for `Estimote LTE beacon` in the `BluetoothScanner`.
 
